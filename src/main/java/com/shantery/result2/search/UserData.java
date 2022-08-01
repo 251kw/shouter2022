@@ -87,4 +87,5 @@ public class UserData {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+	
 }
