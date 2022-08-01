@@ -20,7 +20,7 @@ public class SearchController {
 	//検索条件が入力されたらpostで受け取る
 	//追加すること(仮)　・バリデーションチェック、検索メソッド
 	@RequestMapping(value="/",method=RequestMethod.POST)
-	public ModelAndView send(@RequestParam("loginId")String loginId,
+	public ModelAndView search(@RequestParam("loginId")String loginId,
 			@RequestParam("userName")String userName,@RequestParam("icon1")String icon1,
 			@RequestParam("icon2")String icon2,@RequestParam("profile")String profile, ModelAndView mav) {
 		//検索条件の保持
