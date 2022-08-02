@@ -15,30 +15,30 @@ public class UserData {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
+	@Column(name="userid")
 	//@NotNull
 	private String userId;
 
-	@Column(nullable = true)	
+	@Column(name="loginid",nullable = true)	
 	private String loginId;
 
-	@Column(nullable = true)
+	@Column(name="username",nullable = true)
 	private String userName;
 
 	@Column(nullable = true)
-	private String icon1;
-
-	@Column(nullable = true)
-	private String icon2;
+	private String icon;
 
 	@Column(nullable = true)
 	private String profile;
 	
-	public UserData(String loginId, String userName, String icon1, String icon2, String profile) {
+	public UserData() {
+		
+	}
+	
+	public UserData(String loginId, String userName, String icon, String profile) {
 		this.loginId = loginId;
 		this.userName = userName;
-		this.icon1 = icon1;
-		this.icon2 = icon2;
+		this.icon = icon;
 		this.profile = profile;
 	}
 	
@@ -58,20 +58,12 @@ public class UserData {
 		this.userName = userName;
 	}
 	
-	public String getIcon1() {
-		return icon1;
+	public String getIcon() {
+		return icon;
 	}
 	
-	public void setIcon1(String icon1) {
-		this.icon1 = icon1;
-	}
-	
-	public String getIcon2() {
-		return icon2;
-	}
-	
-	public void setIcon2(String icon2) {
-		this.icon2 = icon2;
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	
 	public String getProfile() {
