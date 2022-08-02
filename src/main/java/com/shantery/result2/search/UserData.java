@@ -6,10 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
+@NotAllBlank(fields = { "loginId","userName","icon1","icon2","profile" })
 @Table(name = "users")
 
 public class UserData {
@@ -20,31 +19,26 @@ public class UserData {
 	//@NotNull
 	private String userId;
 
-	@Column(nullable = true)
-	@NotEmpty	
+	@Column(nullable = true)	
 	private String loginId;
 
 	@Column(nullable = true)
-	@NotEmpty
 	private String userName;
 
 	@Column(nullable = true)
-	@NotEmpty
-	private String password;
+	private String icon1;
 
 	@Column(nullable = true)
-	@NotNull
-	private String icon;
+	private String icon2;
 
 	@Column(nullable = true)
-	@NotEmpty
 	private String profile;
 	
-	public UserData(String loginId, String userName, String password, String icon, String profile) {
+	public UserData(String loginId, String userName, String icon1, String icon2, String profile) {
 		this.loginId = loginId;
 		this.userName = userName;
-		this.password = password;
-		this.icon = icon;
+		this.icon1 = icon1;
+		this.icon2 = icon2;
 		this.profile = profile;
 	}
 	
@@ -56,14 +50,6 @@ public class UserData {
 		this.loginId = loginId;
 	}
 	
-	public String getPassword() {
-		return password;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	public String getUserName() {
 		return userName;
 	}
@@ -72,12 +58,20 @@ public class UserData {
 		this.userName = userName;
 	}
 	
-	public String getIcon() {
-		return icon;
+	public String getIcon1() {
+		return icon1;
 	}
 	
-	public void setIcon(String icon) {
-		this.icon = icon;
+	public void setIcon1(String icon1) {
+		this.icon1 = icon1;
+	}
+	
+	public String getIcon2() {
+		return icon2;
+	}
+	
+	public void setIcon2(String icon2) {
+		this.icon2 = icon2;
 	}
 	
 	public String getProfile() {

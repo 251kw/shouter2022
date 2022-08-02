@@ -20,34 +20,34 @@
 		<table border="1" class="table">
 			<tr>
 				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
-				<td><input type="text" name="loginId" th:value="${value}" id="id" class="form-control"></td>
+				<td><input type="text" name="loginId" th:value="${loginId}" id="id" class="form-control"></td>
 			</tr>
 			<tr>
 				<th th:text="#{table.userName}" class="bi bi-person-circle"><label for="name"></label></th>
-				<td><input type="text" name="userName" th:value="${value}" id="name" class="form-control"></td>
+				<td><input type="text" name="userName" th:value="${userName}" id="name" class="form-control"></td>
 			</tr>
 			<tr th:switch="${check}">
 				<th th:text="#{table.icon}" class="bi bi-emoji-smile"></th>
 				<td th:case="noCheck">
-					<input type="checkbox" name="icon1" value="icon-male">&nbsp;<span class="bi bi-gender-male"></span>
-					<input type="checkbox" name="icon2" value="icon-female">&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="checkbox" name="icon1">&nbsp;<span class="bi bi-gender-male"></span>
+					<input type="checkbox" name="icon2">&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 				<td th:case="icon-male">
-					<input type="checkbox" name="icon1" value="icon-male" checked>&nbsp;<span class="bi bi-gender-male"></span></span>
-					<input type="checkbox" name="icon2" value="icon-female">&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="checkbox" name="icon1" checked>&nbsp;<span class="bi bi-gender-male"></span></span>
+					<input type="checkbox" name="icon2" >&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 				<td th:case="icon-female">
-					<input type="checkbox" name="icon1" value="icon-male">&nbsp;<span class="bi bi-gender-male"></span></span>
-					<input type="checkbox" name="icon2" value="icon-female" checked>&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="checkbox" name="icon1" >&nbsp;<span class="bi bi-gender-male"></span></span>
+					<input type="checkbox" name="icon2" checked>&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 				<td th:case="checks">
-					<input type="checkbox" name="icon1" value="icon-male" checked>&nbsp;<span class="bi bi-gender-male"></span></span>
-					<input type="checkbox" name="icon2" value="icon-female" checked>&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="checkbox" name="icon1" checked>&nbsp;<span class="bi bi-gender-male"></span></span>
+					<input type="checkbox" name="icon2" checked>&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 			</tr>
 			<tr>
 				<th th:text="#{table.profile}" class="bi bi-card-text"><label for="profile"></label></th>
-				<td><input class="form-control" type="text" name="profile" th:value="${value}" size="60" /></td>
+				<td><input class="form-control" type="text" name="profile" th:value="${profile}" size="60" /></td>
 			</tr>
 		</table>
 		<div class="text-center">
@@ -55,9 +55,7 @@
 			<input type="submit" th:value="#{btn.back}" class="btn btn-primary btn-lg">
 		</div>
 	</div>
-	<ul>
-		<li th:if="${error}" th:text="#{error.search.input}">
-	</ul>
+	<p th:if="${error}" th:text="#{error.search.input}" class="error"></p>
 	</form>	
 </div>
 </body>
