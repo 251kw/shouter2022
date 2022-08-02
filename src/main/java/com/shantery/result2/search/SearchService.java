@@ -34,17 +34,25 @@ public class SearchService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<UserData> get3(String icon) {
+	public List<UserData> get3(String icon1) {
 		return (List<UserData>)entityManager
-				.createQuery("from users where icon =" + icon)
+				.createQuery("from users where icon =" + icon1)
 				.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<UserData> get4(String profile) {
+	public List<UserData> get4(String icon2) {
+		return (List<UserData>)entityManager
+				.createQuery("from users where icon =" + icon2)
+				.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<UserData> get5(String profile) {
 		return (List<UserData>)entityManager
 				.createQuery("from users where userName =" + profile)
 				.getResultList();
 	}
+	
 	
 }
