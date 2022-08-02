@@ -57,20 +57,30 @@ public class SearchController {
 			mav.setViewName("UserSearchInput");
 		}else {
 			if(!result.hasErrors()) {
-				//検索メソッド呼び出し
-				List<UserData> list = service.get2(userName);
-				mav.addObject("datalist", list);
 				//検索条件保持
 				mav.addObject("loginId",loginId);
 				mav.addObject("userName", userName);
 				String iconCheck = null;
-				if(icon1==false) {
+				String iconmale = null;
+				String iconfemale = null;
+				if(icon1==false && icon2==false) {
 					iconCheck = "noCheck";
-				}else {
-					iconCheck = "check";
+				}else{
+					if(icon1==true) {
+						iconCheck = "icon-male";
+						iconmale = "icon-male";
+					}else if(icon2==true) {
+						iconCheck = "icon-female";
+						iconfemale = "icon-female";
+					}else {
+						iconCheck = "check";
+					}
 				}
 				mav.addObject("check", iconCheck);
 				mav.addObject("profile", profile);
+				//検索メソッド呼び出し
+				List<UserData> list = service.getAll(loginId, userName, iconmale, iconfemale, profile);
+				mav.addObject("datalist", list);
 				//検索結果画面に遷移
 				mav.setViewName("UserSearchResult");
 			}else {
