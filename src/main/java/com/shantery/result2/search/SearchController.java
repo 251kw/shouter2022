@@ -1,5 +1,8 @@
 package com.shantery.result2.search;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -9,8 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shantery.result2.repositories.SearchRepository;
+
 @Controller
 public class SearchController {
+	
+	@Autowired
+	SearchRepository repository;
+	
+	@Autowired
+	private SearchService service;
 	
 	//index.htmlから送信されてくるのでpost
 	@RequestMapping(value="/",method=RequestMethod.GET)
@@ -28,10 +39,10 @@ public class SearchController {
 			@RequestParam(value="icon1",required=false)boolean icon1,
 			@RequestParam(value="icon2",required=false)boolean icon2,
 			@RequestParam(value="profile",required=false)String profile,
+			@RequestParam(value="back",required=false)String back,
 			@ModelAttribute("formModel")@Validated UserData userdata, BindingResult result,
 			ModelAndView mav) {
-		ModelAndView res = null;
-		if(!result.hasErrors()) {
+		if(back != null) {
 			//検索条件保持
 			mav.addObject("loginId",loginId);
 			mav.addObject("userName", userName);
@@ -39,27 +50,36 @@ public class SearchController {
 			if(icon1==false && icon2==false) {
 				iconCheck = "noCheck";
 			}else {
-				if(icon1==false) {
-					iconCheck = "icon-female";
-				}else if(icon2==false) {
-					iconCheck = "icon-male";
-				}else {
-					iconCheck = "check";
-				}
+				iconCheck = "check";
 			}
 			mav.addObject("check", iconCheck);
 			mav.addObject("profile", profile);
-			//検索メソッド呼び出し
-			
-			//検索結果画面に遷移
 			mav.setViewName("UserSearchInput");
 		}else {
-			//入力エラー表示
-			mav.addObject("error", result.hasErrors());
-			mav.addObject("check", "noCheck");
-			mav.setViewName("UserSearchInput");
+			if(!result.hasErrors()) {
+				//検索メソッド呼び出し
+				List<UserData> list = service.get2(userName);
+				mav.addObject("datalist", list);
+				//検索条件保持
+				mav.addObject("loginId",loginId);
+				mav.addObject("userName", userName);
+				String iconCheck = null;
+				if(icon1==false) {
+					iconCheck = "noCheck";
+				}else {
+					iconCheck = "check";
+				}
+				mav.addObject("check", iconCheck);
+				mav.addObject("profile", profile);
+				//検索結果画面に遷移
+				mav.setViewName("UserSearchResult");
+			}else {
+				//入力エラー表示
+				mav.addObject("error", result.hasErrors());
+				mav.addObject("check", "noCheck");
+				mav.setViewName("UserSearchInput");
+			}
 		}
-		res = mav;
-		return res;
+		return mav;
 	}
 }
