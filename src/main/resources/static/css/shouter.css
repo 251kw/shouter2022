@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+strong{
+	font-size: 30px;
+}
+
+.background{
+	background-color: #33CC99;
+	padding: 25px;
+}
+
+th,td{
+	font-size: 20px;
+	height: 80px;
+}
+
+.bi-gender-male{
+	font-size: 25px;
+}
+
+.bi-gender-female{
+	font-size: 25px;
+}
+
+.form-control{
+	display: inline-block;
+    width: 100%;
+    padding: 10px;
+}
+
+.error{
+	color: red;
+}
