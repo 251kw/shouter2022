@@ -160,6 +160,5 @@ public class SearchService {
 		}
 		
 		return ResultList;
-		
 	}
 }
