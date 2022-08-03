@@ -51,7 +51,7 @@ public class SearchService {
 					} else {
 						// 4.2項目（idとname）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where loginId =" + "'"+ loginId + "'" + "AND userName LIKE" + "'%" + userName)
+								.createQuery("from UserData where loginId =" + "'"+ loginId + "'" + "AND userName LIKE" + "'%" + userName + "%'")
 								.getResultList();
 					}
 				}
