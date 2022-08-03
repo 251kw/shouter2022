@@ -29,20 +29,20 @@
 			<tr th:switch="${check}">
 				<th th:text="#{table.icon}" class="bi bi-emoji-smile"></th>
 				<td th:case="noCheck">
-					<input type="checkbox" name="icon">&nbsp;<span class="bi bi-gender-male"></span>
-					<input type="checkbox" name="icon">&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="checkbox" name="icon1">&nbsp;<span class="bi bi-gender-male"></span>
+					<input type="checkbox" name="icon2">&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 				<td th:case="icon-male">
-					<input type="checkbox" name="icon" checked>&nbsp;<span class="bi bi-gender-male"></span>
-					<input type="checkbox" name="icon" >&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="checkbox" name="icon1" checked>&nbsp;<span class="bi bi-gender-male"></span>
+					<input type="checkbox" name="icon2" >&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 				<td th:case="icon-female">
-					<input type="checkbox" name="icon" >&nbsp;<span class="bi bi-gender-male"></span></span>
-					<input type="checkbox" name="icon" checked>&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="checkbox" name="icon1" >&nbsp;<span class="bi bi-gender-male"></span></span>
+					<input type="checkbox" name="icon2" checked>&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 				<td th:case="checks">
-					<input type="checkbox" name="icon" checked>&nbsp;<span class="bi bi-gender-male"></span></span>
-					<input type="checkbox" name="icon" checked>&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="checkbox" name="icon1" checked>&nbsp;<span class="bi bi-gender-male"></span></span>
+					<input type="checkbox" name="icon2" checked>&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 			</tr>
 			<tr>

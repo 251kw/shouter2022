@@ -66,14 +66,16 @@ public class SearchController {
 				if(icon1==false && icon2==false) {
 					iconCheck = "noCheck";
 				}else{
-					if(icon1==true) {
-						iconCheck = "icon-male";
+					if(icon1==true && icon2== true) {
+						iconCheck = "check";
 						iconmale = "icon-male";
+						iconfemale = "icon-female";
 					}else if(icon2==true) {
 						iconCheck = "icon-female";
 						iconfemale = "icon-female";
 					}else {
-						iconCheck = "check";
+						iconCheck = "icon-male";
+						iconmale = "icon-male";
 					}
 				}
 				mav.addObject("check", iconCheck);

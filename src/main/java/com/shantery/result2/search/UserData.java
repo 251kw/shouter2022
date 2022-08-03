@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@NotAllBlank(fields = { "loginId","userName","icon1","profile" })
+@NotAllBlank(fields = { "loginId","userName","icon","profile" })
 @Table(name = "users")
 
 public class UserData {

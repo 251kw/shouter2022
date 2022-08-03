@@ -11,7 +11,7 @@ public interface SearchRepository extends JpaRepository<UserData, String>{
 	public Optional<UserData> findByUserId(String userId);
 	public Optional<UserData> findByLoginId(String loginId);
 	public Optional<UserData> findByUserName(String userName);
-	public Optional<UserData> findByIcon(String[] icon);
+	public Optional<UserData> findByIcon(String icon);
 	public Optional<UserData> findByProfile(String profile);
 	
 }
