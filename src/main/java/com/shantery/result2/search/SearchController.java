@@ -59,14 +59,21 @@ public class SearchController {
 		//検索結果画面で戻るボタンが押されたら
 		if(back != null) {
 			mav.setViewName("UserSearchInput");
+			//検索条件保持
+			mav.addObject("loginId",loginId);
+			mav.addObject("userName", userName);
+			mav.addObject("check", iconnm[0]);
+			mav.addObject("profile", profile);
 		}else {
 			if(!result.hasErrors()) {
 				//エラーがなかったら
+				boolean searchresult = false;
 				String icon = null;
 				List<UserData> list = null;
 				List<UserData> list2 = null;
 				List<UserData> lists = null;
 				if(length == 2) {
+					iconCheck = "checks";
 					//icon-male,icon-femaleの両方にチェック
 					icon = "icon-male";
 					//icon-maleの場合の検索結果
@@ -78,21 +85,36 @@ public class SearchController {
 					lists = Stream.concat(list.stream(), list2.stream()).collect(Collectors.toList());
 				}else if(length == 1){
 					if(iconnm[0].equals("icon-male")) {
+						iconCheck = "icon-male";
 						//icon-maleのみにチェック
 						icon = "icon-male";
 						lists = service.getAll(loginId, userName, icon, profile);
 					}else {
+						iconCheck = "icon-female";		
 						//icon-femaleのみにチェック
 						icon = "icon-female";
 						lists = service.getAll(loginId, userName, icon, profile);
 					}
 				}else {
+					iconCheck = "noCheck";
 					//チェックなしの場合は空文字にする
 					icon = "";
 					lists = service.getAll(loginId, userName, icon, profile);
 				}
-				//検索結果リストを格納
-				mav.addObject("datalist", lists);
+				//検索結果のサイズで件数判断
+				if(lists.size() != 0) {
+					//検索結果リストを格納
+					mav.addObject("datalist", lists);
+					mav.addObject("result", searchresult);
+				}else {
+					searchresult = true;
+					mav.addObject("result", searchresult);
+				}
+				//検索条件保持
+				mav.addObject("loginId",loginId);
+				mav.addObject("userName", userName);
+				mav.addObject("check", iconCheck);
+				mav.addObject("profile", profile);
 				//検索結果画面に遷移
 				mav.setViewName("UserSearchResult");
 			}else {
@@ -103,25 +125,6 @@ public class SearchController {
 				mav.setViewName("UserSearchInput");
 			}
 		}
-		//検索条件保持
-		mav.addObject("loginId",loginId);
-		mav.addObject("userName", userName);
-		if(length == 2) {
-			//icon-male,icon-femaleの両方にチェック
-			iconCheck = "checks";
-		}else if(length == 1){
-			if(iconnm[0].equals("icon-male")) {
-				//icon-maleのみにチェック
-				iconCheck = "icon-male";
-			}else {
-				//icon-femaleのみにチェック
-				iconCheck = "icon-female";				}
-		}else {
-			//チェックなし
-			iconCheck = "noCheck";
-		}
-		mav.addObject("check", iconCheck);
-		mav.addObject("profile", profile);
 		return mav;
 	}
 }

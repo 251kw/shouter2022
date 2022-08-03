@@ -8,6 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.ReportAsSingleViolation;
 
 /**
  * @author s.ogata
@@ -17,8 +18,11 @@ import javax.validation.Payload;
 @Constraint(validatedBy = {NotAllBlankValidator.class})  
 @Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
+@ReportAsSingleViolation
+
 public @interface NotAllBlank {
 	
+	//デフォルトの設定
 	String message() default "";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
@@ -28,6 +32,7 @@ public @interface NotAllBlank {
 	@Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
+	//フィールドで指定された値を格納
 	public @interface List {
 		NotAllBlank[] value();
 	}
