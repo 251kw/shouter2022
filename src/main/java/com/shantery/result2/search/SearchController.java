@@ -70,26 +70,26 @@ public class SearchController {
 					//icon-male,icon-femaleの両方にチェック
 					icon = "icon-male";
 					//icon-maleの場合の検索結果
-					list = service.getAll(loginId, userName, icon, icon, profile);
+					list = service.getAll(loginId, userName, icon, profile);
 					icon = "icon-female";
 					//icon-femaleの場合の検索結果
-					list2 = service.getAll(loginId, userName, icon, icon, profile);
+					list2 = service.getAll(loginId, userName, icon, profile);
 					//2種類のアイコンで検索した結果を追加したリスト
 					lists = Stream.concat(list.stream(), list2.stream()).collect(Collectors.toList());
 				}else if(length == 1){
 					if(iconnm[0].equals("icon-male")) {
 						//icon-maleのみにチェック
 						icon = "icon-male";
-						lists = service.getAll(loginId, userName, icon, icon, profile);
+						lists = service.getAll(loginId, userName, icon, profile);
 					}else {
 						//icon-femaleのみにチェック
 						icon = "icon-female";
-						lists = service.getAll(loginId, userName, icon, icon, profile);
+						lists = service.getAll(loginId, userName, icon, profile);
 					}
 				}else {
 					//チェックなしの場合は空文字にする
 					icon = "";
-					lists = service.getAll(loginId, userName, icon, icon, profile);
+					lists = service.getAll(loginId, userName, icon, profile);
 				}
 				//検索結果リストを格納
 				mav.addObject("datalist", lists);
