@@ -58,25 +58,6 @@ public class SearchController {
 		}
 		//検索結果画面で戻るボタンが押されたら
 		if(back != null) {
-			//検索条件保持
-			mav.addObject("loginId",loginId);
-			mav.addObject("userName", userName);
-			if(length == 2) {
-				//icon-male,icon-femaleの両方にチェック
-				iconCheck = "checks";
-			}else if(length == 1){
-				if(iconnm[0].equals("icon-male")) {
-					//icon-maleのみにチェック
-					iconCheck = "icon-male";
-				}else {
-					//icon-femaleのみにチェック
-					iconCheck = "icon-female";				}
-			}else {
-				//チェックなし
-				iconCheck = "noCheck";
-			}
-			mav.addObject("check", iconCheck);
-			mav.addObject("profile", profile);
 			mav.setViewName("UserSearchInput");
 		}else {
 			if(!result.hasErrors()) {
@@ -122,6 +103,25 @@ public class SearchController {
 				mav.setViewName("UserSearchInput");
 			}
 		}
+		//検索条件保持
+		mav.addObject("loginId",loginId);
+		mav.addObject("userName", userName);
+		if(length == 2) {
+			//icon-male,icon-femaleの両方にチェック
+			iconCheck = "checks";
+		}else if(length == 1){
+			if(iconnm[0].equals("icon-male")) {
+				//icon-maleのみにチェック
+				iconCheck = "icon-male";
+			}else {
+				//icon-femaleのみにチェック
+				iconCheck = "icon-female";				}
+		}else {
+			//チェックなし
+			iconCheck = "noCheck";
+		}
+		mav.addObject("check", iconCheck);
+		mav.addObject("profile", profile);
 		return mav;
 	}
 }
