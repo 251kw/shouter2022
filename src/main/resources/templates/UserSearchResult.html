@@ -1,3 +1,4 @@
+<!-- s.ogata -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -28,7 +29,6 @@
 				<th></th>
 			</tr>
 			<tr th:each="obj : ${datalist}" th:switch="${obj.icon}">
-			<input type="hidden" name="userName" th:value="${userName}">
 				<td><input type="checkbox" name="icon"></td>
 				<td th:text=${obj.loginId}><input type="hidden" name="loginId" th:value="${loginId}"></td>		
 				<td th:text=${obj.userName}></td>
@@ -36,7 +36,7 @@
 				<td th:case="icon-female"><span class="bi bi-gender-female"></span></td>
 				<td th:text=${obj.profile}></td>
 				<td><input type="submit" th:value="#{btn.edit}" class="btn btn-primary btn-lg"></td>
-			</tr>				
+			</tr>
 		</table>
 		<input type="button" onClick="checkAllBox(true)" th:value="#{btn.choose.all}" class="btn btn-primary">
 		<input type="button" onClick="checkAllBox(false)" th:value="#{btn.not.choose}" class="btn btn-primary">

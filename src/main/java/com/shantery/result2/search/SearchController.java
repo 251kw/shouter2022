@@ -1,6 +1,8 @@
 package com.shantery.result2.search;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shantery.result2.repositories.SearchRepository;
 
+/**
+ * @author s.ogata
+ *
+ */
 @Controller
 public class SearchController {
 	
@@ -23,72 +29,96 @@ public class SearchController {
 	@Autowired
 	private SearchService service;
 	
-	//index.htmlから送信されてくるのでpost
+	//index.htmlから送信されてくるのでpostになるので忘れるな！
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public ModelAndView searchInput(ModelAndView mav) {
 		mav.setViewName("UserSearchInput");
+		//最初の状態はどちらにもチェックなし
 		mav.addObject("check", "noCheck");
 		return mav;
 	}
 	
-	//検索条件が入力されたらpostで受け取る
-	//追加すること(仮)　・バリデーションチェック、検索メソッド
+	//検索条件が入力されたら、また検索結果画面で戻るボタンが押されたらpostで受け取る
+	//検索条件の保持、バリデーションチェック、検索メソッド呼び出し
+	//今後の変更点　リクエストマッピングのバリュー値
 	@RequestMapping(value="/",method=RequestMethod.POST)
 	public ModelAndView search(@RequestParam(value="loginId",required=false)String loginId,
 			@RequestParam(value="userName",required=false)String userName,
-			@RequestParam(value="icon1",required=false)boolean icon1,
-			@RequestParam(value="icon2",required=false)boolean icon2,
+			@RequestParam(value="icon",required=false)String[] iconnm,
 			@RequestParam(value="profile",required=false)String profile,
 			@RequestParam(value="back",required=false)String back,
 			@ModelAttribute("formModel")@Validated UserData userdata, BindingResult result,
 			ModelAndView mav) {
+		//チェックボックス保持用のキーワード
+		String iconCheck = null;
+		//チェックボックスの配列の長さ
+		int length = 0;
+		if(iconnm!=null) {
+			length = iconnm.length;
+		}
+		//検索結果画面で戻るボタンが押されたら
 		if(back != null) {
 			//検索条件保持
 			mav.addObject("loginId",loginId);
 			mav.addObject("userName", userName);
-			String iconCheck = null;
-			if(icon1==false && icon2==false) {
-				iconCheck = "noCheck";
+			if(length == 2) {
+				//icon-male,icon-femaleの両方にチェック
+				iconCheck = "checks";
+			}else if(length == 1){
+				if(iconnm[0].equals("icon-male")) {
+					//icon-maleのみにチェック
+					iconCheck = "icon-male";
+				}else {
+					//icon-femaleのみにチェック
+					iconCheck = "icon-female";				}
 			}else {
-				iconCheck = "check";
+				//チェックなし
+				iconCheck = "noCheck";
 			}
 			mav.addObject("check", iconCheck);
 			mav.addObject("profile", profile);
 			mav.setViewName("UserSearchInput");
 		}else {
 			if(!result.hasErrors()) {
-				//検索条件保持
-				mav.addObject("loginId",loginId);
-				mav.addObject("userName", userName);
-				String iconCheck = null;
-				String iconmale = null;
-				String iconfemale = null;
-				if(icon1==false && icon2==false) {
-					iconCheck = "noCheck";
-				}else{
-					if(icon1==true && icon2== true) {
-						iconCheck = "check";
-						iconmale = "icon-male";
-						iconfemale = "icon-female";
-					}else if(icon2==true) {
-						iconCheck = "icon-female";
-						iconfemale = "icon-female";
+				//エラーがなかったら
+				String icon = null;
+				List<UserData> list = null;
+				List<UserData> list2 = null;
+				List<UserData> lists = null;
+				if(length == 2) {
+					//icon-male,icon-femaleの両方にチェック
+					icon = "icon-male";
+					//icon-maleの場合の検索結果
+					list = service.getAll(loginId, userName, icon, icon, profile);
+					icon = "icon-female";
+					//icon-femaleの場合の検索結果
+					list2 = service.getAll(loginId, userName, icon, icon, profile);
+					//2種類のアイコンで検索した結果を追加したリスト
+					lists = Stream.concat(list.stream(), list2.stream()).collect(Collectors.toList());
+				}else if(length == 1){
+					if(iconnm[0].equals("icon-male")) {
+						//icon-maleのみにチェック
+						icon = "icon-male";
+						lists = service.getAll(loginId, userName, icon, icon, profile);
 					}else {
-						iconCheck = "icon-male";
-						iconmale = "icon-male";
+						//icon-femaleのみにチェック
+						icon = "icon-female";
+						lists = service.getAll(loginId, userName, icon, icon, profile);
 					}
+				}else {
+					//チェックなしの場合は空文字にする
+					icon = "";
+					lists = service.getAll(loginId, userName, icon, icon, profile);
 				}
-				mav.addObject("check", iconCheck);
-				mav.addObject("profile", profile);
-				//検索メソッド呼び出し
-				List<UserData> list = service.getAll(loginId, userName, iconmale, iconfemale, profile);
-				mav.addObject("datalist", list);
+				//検索結果リストを格納
+				mav.addObject("datalist", lists);
 				//検索結果画面に遷移
 				mav.setViewName("UserSearchResult");
 			}else {
 				//入力エラー表示
 				mav.addObject("error", result.hasErrors());
 				mav.addObject("check", "noCheck");
+				//入力画面に遷移
 				mav.setViewName("UserSearchInput");
 			}
 		}

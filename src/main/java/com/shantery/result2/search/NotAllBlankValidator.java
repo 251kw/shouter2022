@@ -7,6 +7,10 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.util.StringUtils;
 
+/**
+ * @author s.ogata
+ *
+ */
 public class NotAllBlankValidator implements ConstraintValidator<NotAllBlank, Object> {
 	
 	private String[] fields;

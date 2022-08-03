@@ -9,6 +9,10 @@ import java.lang.annotation.RetentionPolicy;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+/**
+ * @author s.ogata
+ *
+ */
 @Documented
 @Constraint(validatedBy = {NotAllBlankValidator.class})  
 @Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE})
