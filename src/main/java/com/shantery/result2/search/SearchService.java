@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 //import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Service;
 import static com.shantery.common.constants.*;
+
 /**
  * @author r.totoki
  *
@@ -31,27 +32,27 @@ public class SearchService {
 					if(profile != "") {	// ALL
 						// 1.全項目
 						ResultList = (List<UserData>) entityManager
-								.createQuery(WHERE_LOGINID + "'" + loginId + "'" + USERNAME + "'%" + userName + "%'" 
-											+ ICON + "'" + icon + "'" + PROFILE + "'%" + profile + "%'")
+								.createQuery(WHERE_LOGINID + "'" + loginId + "'" + AND_USERNAME + "'%" + userName + "%'" 
+											+ AND_ICON + "'" + icon + "'" + AND_PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else{
 						// 2.３項目(profile以外)
 						ResultList = (List<UserData>) entityManager
-								.createQuery(WHERE_LOGINID + "'" +loginId + "'" + USERNAME + "'%" + userName + "%'" 
-										+ ICON + "'" + icon + "'")
+								.createQuery(WHERE_LOGINID + "'" +loginId + "'" + AND_USERNAME + "'%" + userName + "%'" 
+										+ AND_ICON + "'" + icon + "'")
 								.getResultList();
 					}
 				} else {
 					if(profile != "") {
 						// 3.3項目（icon以外）
 						ResultList = (List<UserData>) entityManager
-								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + USERNAME + "'%" + userName + "%'" 
-											+ PROFILE + "'%" + profile + "%'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + AND_USERNAME + "'%" + userName + "%'" 
+											+ AND_PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else {
 						// 4.2項目（idとname）
 						ResultList = (List<UserData>) entityManager
-								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + USERNAME + "'%" + userName + "%'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + AND_USERNAME + "'%" + userName + "%'")
 								.getResultList();
 					}
 				}
@@ -60,19 +61,19 @@ public class SearchService {
 					if(profile != "") {
 						// 5.３項目（name以外）
 						ResultList = (List<UserData>) entityManager
-								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + ICON + "'" +icon + "'" + PROFILE + "'%" + profile + "%'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + AND_ICON + "'" +icon + "'" + AND_PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else {
 						// 6.２項目（id,icon）
 						ResultList = (List<UserData>) entityManager
-								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + ICON + "'" + icon + "'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + AND_ICON + "'" + icon + "'")
 								.getResultList();
 					}
 				}else {
 					if(profile != "") {
 						// 7.2項目（id,profile）
 						ResultList = (List<UserData>) entityManager
-								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + PROFILE + "'%" + profile + "%'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + AND_PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					}else {
 						// 8.１項目（id）
@@ -89,13 +90,13 @@ public class SearchService {
 						// 9.３項目（id以外）
 						ResultList = (List<UserData>) entityManager
 								.createQuery(WHERE_USERNAME + "'%" + userName + "%'" 
-											+ ICON + "'" + icon + "'" + PROFILE + "'%" + profile + "%'")
+											+ AND_ICON + "'" + icon + "'" + AND_PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else {
 						// 10.２項目（name,icon）
 						ResultList = (List<UserData>) entityManager
 								.createQuery(WHERE_USERNAME + "'%" + userName + "%'" 
-											+ ICON + "'" + icon + "'" )
+											+ AND_ICON + "'" + icon + "'" )
 								.getResultList();
 					}
 				} else {
@@ -103,7 +104,7 @@ public class SearchService {
 						// 11.２項目（name,profile）
 						ResultList = (List<UserData>) entityManager
 								.createQuery(WHERE_USERNAME + "'%" + userName + "%'" 
-											+ PROFILE + "'%" + profile + "%'")
+											+ AND_PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else {
 						// 12.１項目（name）
@@ -117,7 +118,7 @@ public class SearchService {
 					if(profile != "") {
 						// 13.２項目（icon,profile）
 						ResultList = (List<UserData>) entityManager
-								.createQuery(WHERE_ICON + "'" + icon + "'" + PROFILE + "'%" + profile + "%'")
+								.createQuery(WHERE_ICON + "'" + icon + "'" + AND_PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					}else {
 						// 14.１項目（icon）
