@@ -35,7 +35,7 @@
 				<td th:case="icon-male"><span class="bi bi-gender-male"></span></td>
 				<td th:case="icon-female"><span class="bi bi-gender-female"></span></td>
 				<td th:text=${obj.profile}></td>
-				<td><input type="submit" th:value="#{btn.edit}" class="btn btn-primary btn-lg"></td>
+				<td><input type="submit" name="edit" th:value="#{btn.edit}" th:formaction="@{'/index/' + ${obj.userId}}" class="btn btn-primary"></td>
 			</tr>
 		</table>
 		<input type="button" onClick="checkAllBox(true)" th:value="#{btn.choose.all}" class="btn btn-primary">
@@ -47,7 +47,7 @@
 		<!-- 検索条件の保持 -->
 		<p><input type="hidden" name="loginId" th:value="${loginId}"></p>
 		<p><input type="hidden" name="userName" th:value="${userName}"></p>
-		<p><input type="hidden" name="icon" th:value="${checkbox}"></p>
+		<p><input type="hidden" name="icon" th:value="${icon}"></p>
 		<p><input type="hidden" name="profile" th:value="${profile}"></p>
 	</form>
 	<form method="post" action="/" th:if="${result}">
@@ -56,7 +56,7 @@
 		<!-- 検索条件の保持 -->
 		<p><input type="hidden" name="loginId" th:value="${loginId}"></p>
 		<p><input type="hidden" name="userName" th:value="${userName}"></p>
-		<p><input type="hidden" name="icon" th:value="${checkbox}"></p>
+		<p><input type="hidden" name="icon" th:value="${icon}"></p>
 		<p><input type="hidden" name="profile" th:value="${profile}"></p>
 	</form>
 </div>

@@ -20,14 +20,14 @@
 	<div class="form-group">
 		<table border="1" class="table">
 			<tr>
-				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
-				<td><input type="text" name="loginId" th:value="${loginId}" id="id" class="form-control"></td>
+				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"></th></label>
+				<td><input type="text" name="loginId" th:value="${loginId}" class="form-control"></td>
 			</tr>
 			<tr>
-				<th th:text="#{table.userName}" class="bi bi-person-circle"><label for="name"></label></th>
-				<td><input type="text" name="userName" th:value="${userName}" id="name" class="form-control"></td>
+				<th th:text="#{table.userName}" class="bi bi-person-circle"></th>
+				<td><input type="text" name="userName" th:value="${userName}" class="form-control"></td>
 			</tr>
-			<tr th:switch="${checkbox}">
+			<tr th:switch="${icon}">
 				<th th:text="#{table.icon}" class="bi bi-emoji-smile"></th>
 				<td th:case="noCheck">
 					<input type="checkbox" name="icon" value="icon-male">&nbsp;<span class="bi bi-gender-male"></span>
@@ -47,7 +47,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th th:text="#{table.profile}" class="bi bi-card-text"><label for="profile"></label></th>
+				<th th:text="#{table.profile}" class="bi bi-card-text"></th>
 				<td><input class="form-control" type="text" name="profile" th:value="${profile}" size="60" /></td>
 			</tr>
 		</table>
