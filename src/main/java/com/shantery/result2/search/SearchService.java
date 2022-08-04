@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 //import javax.persistence.criteria.CriteriaQuery;
 //import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Service;
-
+import static com.shantery.common.constants.*;
 /**
  * @author r.totoki
  *
@@ -31,27 +31,27 @@ public class SearchService {
 					if(profile != "") {	// ALL
 						// 1.全項目
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where loginId =" + "'"+ loginId + "'" + "AND userName LIKE" + "'%" + userName + "%'" 
-											+ "AND icon =" + "'" + icon + "'" + "AND profile LIKE" + "'%" + profile + "%'")
+								.createQuery(WHERE_LOGINID + "'" + loginId + "'" + USERNAME + "'%" + userName + "%'" 
+											+ ICON + "'" + icon + "'" + PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else{
 						// 2.３項目(profile以外)
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where loginId =" + "'" +loginId + "'" + "AND userName LIKE" + "'%" + userName + "%'" 
-										+ "AND icon =" + "'" + icon + "'")
+								.createQuery(WHERE_LOGINID + "'" +loginId + "'" + USERNAME + "'%" + userName + "%'" 
+										+ ICON + "'" + icon + "'")
 								.getResultList();
 					}
 				} else {
 					if(profile != "") {
 						// 3.3項目（icon以外）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where loginId =" + "'"+ loginId + "'" + "AND userName LIKE" + "'%" + userName + "%'" 
-											+ "AND profile LIKE" + "'%" + profile + "%'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + USERNAME + "'%" + userName + "%'" 
+											+ PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else {
 						// 4.2項目（idとname）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where loginId =" + "'"+ loginId + "'" + "AND userName LIKE" + "'%" + userName + "%'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + USERNAME + "'%" + userName + "%'")
 								.getResultList();
 					}
 				}
@@ -60,24 +60,24 @@ public class SearchService {
 					if(profile != "") {
 						// 5.３項目（name以外）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where loginId =" + "'"+ loginId + "'" + "AND icon =" + "'" +icon + "'" + "AND profile LIKE" + "'%" + profile + "%'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + ICON + "'" +icon + "'" + PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else {
 						// 6.２項目（id,icon）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where loginId =" + "'"+ loginId + "'" + "AND icon =" + "'" + icon + "'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + ICON + "'" + icon + "'")
 								.getResultList();
 					}
 				}else {
 					if(profile != "") {
 						// 7.2項目（id,profile）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where loginId =" + "'"+ loginId + "'" + "AND profile LIKE" + "'%" + profile + "%'")
+								.createQuery(WHERE_LOGINID + "'"+ loginId + "'" + PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					}else {
 						// 8.１項目（id）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where loginId =" + "'" +loginId + "'")
+								.createQuery(WHERE_LOGINID + "'" +loginId + "'")
 								.getResultList();
 					}
 				}
@@ -88,27 +88,27 @@ public class SearchService {
 					if(profile != "") {
 						// 9.３項目（id以外）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where userName LIKE" + "'%" + userName + "%'" 
-											+ "AND icon =" + "'" + icon + "'" + "AND profile LIKE" + "'%" + profile + "%'")
+								.createQuery(WHERE_USERNAME + "'%" + userName + "%'" 
+											+ ICON + "'" + icon + "'" + PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else {
 						// 10.２項目（name,icon）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where userName LIKE" + "'%" + userName + "%'" 
-											+ "AND icon =" + "'" + icon + "'" )
+								.createQuery(WHERE_USERNAME + "'%" + userName + "%'" 
+											+ ICON + "'" + icon + "'" )
 								.getResultList();
 					}
 				} else {
 					if(profile != "") {
 						// 11.２項目（name,profile）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where userName LIKE" + "'%" + userName + "%'" 
-											+ "AND profile LIKE" + "'%" + profile + "%'")
+								.createQuery(WHERE_USERNAME + "'%" + userName + "%'" 
+											+ PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					} else {
 						// 12.１項目（name）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where userName LIKE" + "'%" + userName + "%'")
+								.createQuery(WHERE_USERNAME + "'%" + userName + "%'")
 								.getResultList();
 					}
 				}
@@ -117,19 +117,19 @@ public class SearchService {
 					if(profile != "") {
 						// 13.２項目（icon,profile）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where icon =" + "'" + icon + "'" + "AND profile LIKE" + "'%" + profile + "%'")
+								.createQuery(WHERE_ICON + "'" + icon + "'" + PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					}else {
 						// 14.１項目（icon）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where icon =" + "'" + icon + "'" )
+								.createQuery(WHERE_ICON + "'" + icon + "'" )
 								.getResultList();
 					}
 				} else {
 					if(profile != "") {
 						// 15.１項目（profile）
 						ResultList = (List<UserData>) entityManager
-								.createQuery("from UserData where profile LIKE" + "'%" + profile + "%'")
+								.createQuery(WHERE_PROFILE + "'%" + profile + "%'")
 								.getResultList();
 					}
 				}
@@ -139,151 +139,3 @@ public class SearchService {
 		return ResultList;
 	}
 }
-
-
-
-
-
-/* ３２パターンの方、一応キープしときます
-@SuppressWarnings("unchecked")
-public List<UserData> getAll(String loginId, String userName, String icon1, String icon2, String profile) {
-	List<UserData> ResultList = null;
-	if(userName.equals("") && icon1==null && icon2==null && profile.equals("")) {	// ログインIDのみ
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId)
-				.getResultList();
-	} else if(loginId.equals("") && icon1==null && icon2==null &&  profile.equals("")) {	// ユーザー名のみ
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where userName LIKE" + "'%" + userName + "%'")
-				.getResultList();
-	} else if(loginId.equals("") && userName.equals("") && icon2==null &&  profile.equals("")) {	// アイコン１
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where icon =" + icon1)
-				.getResultList();
-	} else if(loginId.equals("") && userName.equals("") && icon1==null &&  profile.equals("")) {	// アイコン２
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where icon =" + icon2)
-				.getResultList();
-	} else if(loginId.equals("") && userName.equals("") &&  icon1==null && icon2==null){	// プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(loginId.equals("") && icon1== null && icon2==null) {	// ユーザー名、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where userName =" + "%" + userName + "%" + "AND profile =" + "%" + profile + "%" )
-				.getResultList();
-	} else if(loginId.equals("") && userName.equals("") && icon1==null) {	// アイコン２、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where icon =" + icon2 + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(loginId.equals("") && userName.equals("") && icon2==null) {	// アイコン１、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where icon =" + icon1 + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(userName.equals("") && icon1==null && icon2==null) {	// ログインID、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(userName.equals("") && icon1==null) {		// ログインID、アイコン２
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(loginId.equals("") && icon1==null) {	// ユーザー名、アイコン２
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where userName =" + userName + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(loginId.equals("") && userName.equals("")) {	// 	アイコン１、アイコン２
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where icon =" + icon1 + "OR" + icon2)
-				.getResultList();
-	} else if(icon1==null && icon2==null && profile.equals("")) {
-		// ログインID、ユーザー名
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND userName =" + "%" + userName + "%")
-				.getResultList();
-	} else if(loginId.equals("") && icon2==null && profile.equals("")) {
-		//ユーザー名、アイコン1
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where userName =" + "%" + userName + "%" + "AND icon=" + icon1)
-				.getResultList();
-	} else if(userName.equals("") && icon2==null && profile.equals("")) {
-		//ログインID、アイコン1
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND icon=" + icon1)
-				.getResultList();
-	} else if((loginId.equals("") && userName.equals(""))) {
-		//アイコン1、アイコン2、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(loginId.equals("") && icon1==null) {
-		//ユーザー名、アイコン2、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where userName =" + "%" + userName + "%" + "AND icon=" + icon2 + "AND profile ="+ "%" + profile + "%")
-				.getResultList();
-	} else if(userName.equals("") && icon1==null) {
-		// ログインID、アイコン２、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND icon=" + icon2 + "AND profile ="+ "%" + profile + "%")
-				.getResultList();
-	} else if(loginId.equals("") && icon2==null) {
-		//ユーザー名、アイコン1、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where userName =" + "%" + userName + "%" + "AND icon=" + icon1 + "AND profile ="+ "%" + profile + "%")
-				.getResultList();
-	} else if(userName.equals("") && icon2==null) {
-		// ログインID、アイコン1、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND icon=" + icon1 + "AND profile ="+ "%" + profile + "%")
-				.getResultList();
-	} else if(loginId.equals("")  && profile.equals("")) {
-		//ユーザー名、アイコン1、アイコン2
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where userName =" + "%" + userName + "%" )
-				.getResultList();
-	} else if(userName.equals("") && profile.equals("")) {
-		//ログインID、アイコン1、アイコン2
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId)
-				.getResultList();
-	} else if(icon1==null && profile.equals("")){
-		//ログインID、ユーザー名、アイコン2
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND userName =" + "%" + userName + "%" + "AND icon =" + icon2)
-				.getResultList();
-	} else if(icon1==null && icon2==null){
-		//ログインID、ユーザー名、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND userName =" + "%" + userName + "%" + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(icon2==null && profile.equals("")) {
-		//ログインID、ユーザー名、アイコン1
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND userName =" + "%" + userName + "%" + "AND icon =" + icon1)
-				.getResultList();
-	} else if(loginId.equals("")) {
-		//ユーザー名、アイコン1、アイコン2、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where userName =" + "%" + userName + "%" + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(userName.equals("")) {
-		//ログインID、アイコン1、アイコン2、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(icon1==null){
-		//ログインID、ユーザー名、アイコン2、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND userName =" + "%" + userName + "%" + "AND icon =" + icon2 + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(icon2==null) {
-		//ログインID、ユーザー名、アイコン1、プロフィール
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND userName =" + "%" + userName + "%" + "AND icon =" + icon1 + "AND profile =" + "%" + profile + "%")
-				.getResultList();
-	} else if(profile.equals("")) {
-		//ログインID、ユーザーID、アイコン1、アイコン2
-		ResultList = (List<UserData>) entityManager
-				.createQuery("from UserData where loginId =" + loginId + "AND userName =" + "%" + userName + "%" )
-				.getResultList();
-*/
