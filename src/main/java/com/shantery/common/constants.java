@@ -10,6 +10,8 @@ public class constants {
 	public static final String ICONFEMALE = "icon-user-female";
 	public static final String PROFILE = "profile";
 	public static final String WRITING = "writing";
+	
+	//　SQL文関連
 	public static final String WHERE_LOGINID = "from UserData where loginId =";
 	public static final String WHERE_USERNAME = "from UserData where userName LIKE";
 	public static final String WHERE_ICON = "from UserData where icon =";
