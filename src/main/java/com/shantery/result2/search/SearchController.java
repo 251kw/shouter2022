@@ -34,7 +34,7 @@ public class SearchController {
 	public ModelAndView searchInput(ModelAndView mav) {
 		mav.setViewName("UserSearchInput");
 		//最初の状態はどちらにもチェックなし
-		mav.addObject("check", "noCheck");
+		mav.addObject("checkbox", "noCheck");
 		return mav;
 	}
 	
@@ -62,7 +62,7 @@ public class SearchController {
 			//検索条件保持
 			mav.addObject("loginId",loginId);
 			mav.addObject("userName", userName);
-			mav.addObject("check", iconnm[0]);
+			mav.addObject("checkbox", iconnm[0]);
 			mav.addObject("profile", profile);
 		}else {
 			if(!result.hasErrors()) {
@@ -113,7 +113,7 @@ public class SearchController {
 				//検索条件保持
 				mav.addObject("loginId",loginId);
 				mav.addObject("userName", userName);
-				mav.addObject("check", iconCheck);
+				mav.addObject("checkbox", iconCheck);
 				mav.addObject("profile", profile);
 				//検索結果画面に遷移
 				mav.setViewName("UserSearchResult");
