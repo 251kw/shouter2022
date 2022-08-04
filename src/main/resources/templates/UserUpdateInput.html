@@ -5,9 +5,9 @@
 	<title th:text="#{title.update.input}"></title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://localhost:8080/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-	<link rel="stylesheet" href="css/shouter.css">
+	<link rel="stylesheet" href="http://localhost:8080/css/shouter.css" >
 </head>
 <body>
 <div class="background">
@@ -16,9 +16,9 @@
 	</div>
 </div>
 <div class="container-fluid">
+	<form method="post" action="/UserUpdateConfirm">
 	<div class="form-group">
 		<table border="1" class="table">
-		<form method="post" action="/UserUpdateConfirm">
 			<tr>
 				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
 				<td><input type="text" name="loginId" th:value="${loginId}" id="id" class="form-control">
@@ -33,11 +33,11 @@
 			<tr th:switch="${icon}">
 				<th th:text="#{table.icon}" class="bi bi-emoji-smile"></th>
 				<td th:case="icon-male">
-					<input type="radio" name="icon" value="icon-male" checked>&nbsp;<span class="bi bi-gender-male"></span></span>
+					<input type="radio" name="icon" value="icon-male" checked>&nbsp;<span class="bi bi-gender-male"></span>
 					<input type="radio" name="icon" value="icon-female">&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 				<td th:case="icon-female">
-					<input type="radio" name="icon" value="icon-male">&nbsp;<span class="bi bi-gender-male"></span></span>
+					<input type="radio" name="icon" value="icon-male">&nbsp;<span class="bi bi-gender-male"></span>
 					<input type="radio" name="icon" value="icon-female" checked>&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 			</tr>
@@ -51,7 +51,7 @@
 			<a th:href="@{/index}"><button type="submit" th:value="#{btn.OK}" class="btn btn-primary btn-lg"></button></a>
 		</div>
 	</div>
-	</form>	
-</div>
+	</form>
+</div>	
 </body>
 </html>
