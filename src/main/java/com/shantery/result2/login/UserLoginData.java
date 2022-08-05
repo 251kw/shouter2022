@@ -31,14 +31,26 @@ public class UserLoginData {
 	@Column(nullable = false)	
 	private String password;
 	
+	@Column(nullable = false)	
+	private String userName;
+	
+	@Column(nullable = false)	
+	private String icon;
+	
+	@Column(nullable = false)	
+	private String profile;
+	
 	public UserLoginData() {
 		
 	}
 	
-	public UserLoginData(Long userId, String loginId, String password) {
+	public UserLoginData(Long userId, String loginId, String password, String userName, String icon, String profile) {
 		this.userId = userId;
 		this.loginId = loginId;
 		this.password = password;
+		this.userName = userName;
+		this.icon = icon;
+		this.profile = profile;
 	}
 	
 	public Long getUserId() {
@@ -63,6 +75,30 @@ public class UserLoginData {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public String getIcon() {
+		return icon;
+	}
+	
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	
+	public String getProfile() {
+		return profile;
+	}
+	
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 
 }
