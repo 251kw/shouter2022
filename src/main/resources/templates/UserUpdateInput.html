@@ -26,12 +26,13 @@
 					<input type="hidden" name="loginID" th:value="${loginID}">
 					<!-- userId保持(更新時に使用) -->
 					<input type="hidden" name="userId" th:value="${userId}">
-					<!---->
+					<!-- 既存のログインIDの場合エラー表示-->
 					<div th:if="${error}" th:text="#{error.update.input}" class="error"></div></td>
 			</tr>
 			<tr>
 				<th th:text="#{table.userName}" class="bi bi-person-circle"><label for="name"></label></th>
-				<td><input type="text" name="UserName" th:value="${UserName}" id="name" class="form-control"></td>
+				<td><input type="text" name="UserName" th:value="${UserName}" id="name" class="form-control">
+				<div th:if="${error}" th:text="#{}"></div></td>
 			</tr>
 			<tr th:switch="${Icon}">
 				<th th:text="#{table.icon}" class="bi bi-emoji-smile"></th>
