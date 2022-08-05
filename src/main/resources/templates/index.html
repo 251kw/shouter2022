@@ -4,9 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://localhost:8080/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-	<link rel="stylesheet" href="css/shouter.css">
+	<link rel="stylesheet" href="http://localhost:8080/css/shouter.css">
 	<title th:text="#{title.board.input}"></title>
 </head>
 
@@ -31,7 +31,7 @@
 			</table>
 			<div class="text-center"><input class="btn btn-primary" type="submit" th:value="#{btn.login}" formaction="top" />
 				<input class="btn btn-primary" type="submit" th:value="#{btn.where.register}" formaction="UserInfoInput"/>
-				<input class="btn btn-primary" type="submit" th:value="#{btn.where.search}" formaction="UserSearchInput"/>
+				<input class="btn btn-primary" type="submit" th:value="#{btn.where.search}" th:formaction="@{/search}"/>
 			</div>
 		</div>
 		<p th:if="${error}" th:text="#{error.write.miss}" class="error"></p>
