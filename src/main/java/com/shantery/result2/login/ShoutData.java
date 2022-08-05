@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author r.totoki
+ *
+ */
+
 @Entity
 @Table(name="shouts")
 public class ShoutData {
