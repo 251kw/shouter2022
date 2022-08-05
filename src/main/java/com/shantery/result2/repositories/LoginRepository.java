@@ -1,6 +1,8 @@
 package com.shantery.result2.repositories;
 
+import com.shantery.result2.login.UserLoginData;
 import com.shantery.result2.search.UserData;
+
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,12 +13,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 @Repository
-public interface SearchRepository extends JpaRepository<UserData, Long>{
+public interface LoginRepository extends JpaRepository<UserLoginData, Long>{
 	
 	public Optional<UserData> findByUserId(Long userId);
 	public Optional<UserData> findByLoginId(String loginId);
-	public Optional<UserData> findByUserName(String userName);
-	public Optional<UserData> findByIcon(String icon);
-	public Optional<UserData> findByProfile(String profile);
+	public Optional<UserData> findByPassword(String password);
 	
 }

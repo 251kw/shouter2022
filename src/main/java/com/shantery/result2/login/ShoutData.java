@@ -7,17 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.shantery.result2.search.NotAllBlank;
-
 @Entity
-@NotAllBlank(fields = { "userName","icon","date","writing" })
 @Table(name="shouts")
 public class ShoutData {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="userId", nullable = false)
-	private String userId;
+	private Long userId;
 	
 	@Column(name="username", nullable = false)
 	private String userName;
@@ -35,7 +32,7 @@ public class ShoutData {
 		
 	}
 	
-	public ShoutData(String userId, String userName, String icon, String date, String writing) {
+	public ShoutData(Long userId, String userName, String icon, String date, String writing) {
 		this.userId = userId;
 		this.userName = userName;
 		this.icon = icon;
@@ -43,11 +40,11 @@ public class ShoutData {
 		this.writing = writing;
 	}
 	
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
