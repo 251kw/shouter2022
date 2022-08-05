@@ -21,8 +21,11 @@
 		<table border="1" class="table">
 			<tr>
 				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
-				<td><input type="text" name="loginId" th:value="${loginId}" id="id" class="form-control">
-					<!-- ログインID保持 -->
+				<td><!-- userId保持-->
+					<input type="hidden" name="userId" th:value="${userId}">
+					<!-- loginId保持-->
+					<input type="text" name="loginId" th:value="${loginId}" id="id" class="form-control">
+					<!-- loginID保持 -->
 					<input type="hidden" name="loginID" th:value="${loginID}">
 					<div th:if="${error}" th:text="#{error.update.input}" class="error"></div></td>
 			</tr>

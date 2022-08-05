@@ -27,10 +27,6 @@ public class UserInfo {
 	@NotEmpty
 	private String userName;
 
-	@Column(name="password", nullable = true)
-	@NotEmpty
-	private String password;
-
 	@Column(name="icon", nullable = true)
 	@NotNull
 	private String icon;
@@ -40,9 +36,9 @@ public class UserInfo {
 	private String profile;
 	
 	//引数ありコンストラクタ
-	public UserInfo(String loginId, String password, String userName, String icon, String profile) {
+	public UserInfo(Long userId, String loginId, String userName, String icon, String profile) {
+		this.userId = userId;
 		this.loginId = loginId;
-		this.password = password;
 		this.userName = userName;
 		this.icon = icon;
 		this.profile = profile;
@@ -74,14 +70,6 @@ public class UserInfo {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getIcon() {

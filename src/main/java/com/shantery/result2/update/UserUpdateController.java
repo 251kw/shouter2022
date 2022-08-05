@@ -1,38 +1,31 @@
 package com.shantery.result2.update;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shantery.result2.repositories.UserUpdateRepository;
+
 @Controller
 public class UserUpdateController {
 	@Autowired
-	UserUpdateService uuService;
+	UserUpdateRepository repository;
 	
-	//ユーザー情報画面一覧表示
-	@RequestMapping(value="/index")
-	public String displayList(Model model) {
-		List<UserInfo> user = uuService.searchAll();
-		model.addAttribute("users", user);
-		return "index";
-	}
-	
-	//編集へ画面遷移
-	@RequestMapping(value="/index/{id}")
+	//編集画面へ遷移
+	@RequestMapping(value="/index/{id}", method=RequestMethod.POST)
 	public ModelAndView edit(@PathVariable Long id, ModelAndView mav) {
-		UserInfo user = uuService.findById(id);
+		UserInfo user = repository.findById(id).get();
 		String loginId = user.getLoginId();
 		String loginID = user.getLoginId();
 		String userName = user.getUserName();
 		String icon = user.getIcon();
 		String profile = user.getProfile();
+		mav.addObject("userId", id);
 		mav.addObject("loginId", loginId);
 		mav.addObject("loginID", loginID);
 		mav.addObject("userName", userName);
@@ -42,9 +35,10 @@ public class UserUpdateController {
 		return mav;
 	}
 	
-	//編集確認画面へ遷移
+	//更新確認画面へ遷移
 	@RequestMapping(value="/UserUpdateConfirm", method=RequestMethod.POST)
-	public ModelAndView editCheck(@RequestParam(name="loginID") String loginID,	//初期のログインID	
+	public ModelAndView editCheck(@RequestParam(name="userId") Long userId,
+								  @RequestParam(name="loginID") String loginID,	//初期のログインID	
 								  @RequestParam(name="loginId") String loginId,	//変更後のログインID
 								  @RequestParam(name="userName") String userName,
 								  @RequestParam(name="icon") String icon,
@@ -52,12 +46,14 @@ public class UserUpdateController {
 								  ModelAndView mav) {
 		
 		boolean check = false;
+		boolean checkID = false;
 		
 		//変更後のログインID検索
-		UserInfo user = uuService.findByLoginId(loginId);
+		UserInfo user = repository.findByLoginId(loginId);
 		
 		//変更前と変更後が同じ場合
 		if(loginId.equals(loginID)) {
+			mav.addObject("userId", userId);
 			mav.addObject("loginId", loginId);
 			mav.addObject("loginID", loginID);
 			mav.addObject("userName", userName);
@@ -65,6 +61,7 @@ public class UserUpdateController {
 			mav.addObject("profile", profile);
 			mav.setViewName("UserUpdateConfirm");
 		}else {
+			mav.addObject("userId", userId);
 			mav.addObject("loginId", loginId);
 			mav.addObject("loginID", loginID);
 			mav.addObject("userName", userName);
@@ -79,6 +76,27 @@ public class UserUpdateController {
 				mav.setViewName("UserUpdateInput");
 			}
 		}
+		return mav;
+	}
+	
+	//更新結果画面へ遷移
+	@RequestMapping(value="/UserUpdateResult", method=RequestMethod.POST)
+	public ModelAndView updateResult(@ModelAttribute UserInfo userInfo,
+									 @RequestParam(name="userId") Long userId,
+									 @RequestParam(name="loginId") String loginId,
+									 @RequestParam(name="userName") String userName,
+									 @RequestParam(name="icon") String icon,
+									 @RequestParam(name="profile") String profile,
+									 ModelAndView mav) {
+		//更新
+		repository.saveAndFlush(userInfo);
+		
+		//更新結果画面表示
+		mav.addObject("loginId", loginId);
+		mav.addObject("userName", userName);
+		mav.addObject("icon", icon);
+		mav.addObject("profile", profile);
+		mav.setViewName("UserUpdateResult");
 		return mav;
 	}
 }

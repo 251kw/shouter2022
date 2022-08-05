@@ -8,6 +8,7 @@ import com.shantery.result2.update.UserInfo;
 @Repository
 public interface UserUpdateRepository extends JpaRepository<UserInfo, Long>{
 	
+	UserInfo findByUserId(Long userId);
 	//ログインID検索
 	UserInfo findByLoginId(String loginId);
 }
