@@ -29,12 +29,22 @@ public class SearchController {
 	@Autowired
 	private SearchService service;
 	
+	@RequestMapping("/sample")
+	public String sample() {
+		return "sample";
+	}
+	
 	//index.htmlから送信されてくるのでpostになるので忘れるな！
-	@RequestMapping(value="/",method=RequestMethod.GET)
-	public ModelAndView searchInput(ModelAndView mav) {
-		mav.setViewName(SEARCH_INPUT);
-		//最初の状態はどちらにもチェックなし
-		mav.addObject(ADDNAME_ICON, ICON_NOCHECK);
+	@RequestMapping(value="/search",method=RequestMethod.POST)
+	public ModelAndView searchInput(@RequestParam(value="back",required=false)String back,
+									ModelAndView mav) {
+		if(back != null) {
+			mav.setViewName("sample");
+		}else {
+			mav.setViewName(SEARCH_INPUT);
+			//最初の状態はどちらにもチェックなし
+			mav.addObject(ADDNAME_ICON, ICON_NOCHECK);
+		}
 		return mav;
 	}
 	
