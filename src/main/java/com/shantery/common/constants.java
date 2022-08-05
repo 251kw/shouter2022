@@ -18,6 +18,7 @@ public class constants {
 	
 	//　SQL文関連
 	public static final String WHERE_LOGINID = "from UserData where loginId =";
+	public static final String WHERE_LOGINID2 = "from UserLoginData where loginId =";
 	public static final String WHERE_USERNAME = "from UserData where userName LIKE";
 	public static final String WHERE_ICON = "from UserData where icon =";
 	public static final String WHERE_PROFILE = "from UserData where profile LIKE";
