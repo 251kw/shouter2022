@@ -29,11 +29,6 @@ public class SearchController {
 	@Autowired
 	private SearchService service;
 	
-	@RequestMapping("/sample")
-	public String sample() {
-		return "sample";
-	}
-	
 	//index.htmlから送信されてくるのでpostになるので忘れるな！
 	@RequestMapping(value="/search",method=RequestMethod.POST)
 	public ModelAndView searchInput(@RequestParam(value="back",required=false)String back,
@@ -68,7 +63,7 @@ public class SearchController {
 		}
 		//検索結果画面で戻るボタンが押されたら
 		if(back != null) {
-			mav.setViewName(SEARCH_INPUT);
+			mav.setViewName("index.html");
 			//検索条件保持
 			mav.addObject(ADDNAME_LOGINID,loginId);
 			mav.addObject(ADDNAME_USERNAME, userName);
