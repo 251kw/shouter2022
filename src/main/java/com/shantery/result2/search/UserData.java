@@ -49,6 +49,8 @@ public class UserData {
 		this.profile = profile;
 	}
 	
+	
+	
 	public Long getUserId() {
 		return userId;
 	}

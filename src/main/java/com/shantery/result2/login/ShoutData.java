@@ -16,6 +16,9 @@ public class ShoutData {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="userId", nullable = false)
+	private String userId;
+	
 	@Column(name="username", nullable = false)
 	private String userName;
 	
@@ -32,12 +35,22 @@ public class ShoutData {
 		
 	}
 	
-	public ShoutData(String userName, String icon, String date, String writing) {
+	public ShoutData(String userId, String userName, String icon, String date, String writing) {
+		this.userId = userId;
 		this.userName = userName;
 		this.icon = icon;
 		this.date = date;
 		this.writing = writing;
 	}
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 
 	public String getUserName() {
 		return userName;
