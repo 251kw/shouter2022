@@ -15,29 +15,35 @@
 	</div>
 </div>
 <div class="container-fluid">
-	<form method="post" action="/search">
+	<form method="post" action="/">
 	<div class="form-group">
 		<table border="1" class="table">
 			<tr>
 				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
-				<td th:text="${loginId}"></td>
+				<td th:text="${LoginId}">
+				<input type="hidden" name="userId" th:value="${userId}"></td>
 			</tr>
 			<tr>
 				<th th:text="#{table.userName}" class="bi bi-person-circle"><label for="name"></label></th>
-				<td th:text="${userName}"></td>
+				<td th:text="${UserName}"></td>
 			</tr>
-			<tr th:switch="${icon}">
+			<tr th:switch="${Icon}">
 				<th th:text="#{table.icon}" class="bi bi-emoji-smile"></th>
 				<td th:case="icon-male">&nbsp;<span class="bi bi-gender-male"></span></td>
 				<td th:case="icon-female">&nbsp;<span class="bi bi-gender-female"></span></td>
 			</tr>
 			<tr>
 				<th th:text="#{table.profile}" class="bi bi-card-text"><label for="profile"></label></th>
-				<td th:text="${profile}"></td>
+				<td th:text="${Profile}"></td>
 			</tr>
 		</table>
 		<div class="text-center">
 			<input type="submit" th:value="#{btn.back}" class="btn btn-primary btn-lg">
+				<!-- 検索条件の保持 -->	
+				<p><input type="hidden" name="loginId" th:value="${loginId}"></p>
+				<p><input type="hidden" name="userName" th:value="${userName}"></p>
+				<p><input type="hidden" name="icon" th:value="${icon}"></p>
+				<p><input type="hidden" name="profile" th:value="${profile}"></p>
 		</div>
 	</div>
 	</form>	

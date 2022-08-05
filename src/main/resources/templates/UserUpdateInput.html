@@ -21,37 +21,42 @@
 		<table border="1" class="table">
 			<tr>
 				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
-				<td><!-- userId保持-->
-					<input type="hidden" name="userId" th:value="${userId}">
-					<!-- loginId保持-->
-					<input type="text" name="loginId" th:value="${loginId}" id="id" class="form-control">
-					<!-- loginID保持 -->
+				<td><input type="text" name="LoginId" th:value="${LoginId}" id="id" class="form-control">
+					<!-- ログインID保持 -->
 					<input type="hidden" name="loginID" th:value="${loginID}">
+					<!-- userId保持(更新時に使用) -->
+					<input type="hidden" name="userId" th:value="${userId}">
+					<!---->
 					<div th:if="${error}" th:text="#{error.update.input}" class="error"></div></td>
 			</tr>
 			<tr>
 				<th th:text="#{table.userName}" class="bi bi-person-circle"><label for="name"></label></th>
-				<td><input type="text" name="userName" th:value="${userName}" id="name" class="form-control"></td>
+				<td><input type="text" name="UserName" th:value="${UserName}" id="name" class="form-control"></td>
 			</tr>
-			<tr th:switch="${icon}">
+			<tr th:switch="${Icon}">
 				<th th:text="#{table.icon}" class="bi bi-emoji-smile"></th>
 				<td th:case="icon-male">
-					<input type="radio" name="icon" value="icon-male" checked>&nbsp;<span class="bi bi-gender-male"></span>
-					<input type="radio" name="icon" value="icon-female">&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="radio" name="Icon" value="icon-male" checked>&nbsp;<span class="bi bi-gender-male"></span>
+					<input type="radio" name="Icon" value="icon-female">&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 				<td th:case="icon-female">
-					<input type="radio" name="icon" value="icon-male">&nbsp;<span class="bi bi-gender-male"></span>
-					<input type="radio" name="icon" value="icon-female" checked>&nbsp;<span class="bi bi-gender-female"></span>
+					<input type="radio" name="Icon" value="icon-male">&nbsp;<span class="bi bi-gender-male"></span>
+					<input type="radio" name="Icon" value="icon-female" checked>&nbsp;<span class="bi bi-gender-female"></span>
 				</td>
 			</tr>
 			<tr>
 				<th th:text="#{table.profile}" class="bi bi-card-text"><label for="profile"></label></th>
-				<td><input class="form-control" type="text" name="profile" th:value="${profile}" size="60" /></td>
+				<td><input class="form-control" type="text" name="Profile" th:value="${Profile}" size="60" /></td>
 			</tr>
 		</table>
 		<div class="text-center">
 			<input type="submit" th:value="#{btn.OK}" class="btn btn-primary btn-lg">
 			<a th:href="@{/index}"><button type="submit" th:value="#{btn.OK}" class="btn btn-primary btn-lg"></button></a>
+				<!-- 検索条件の保持　-->
+				<p><input type="hidden" name="loginId" th:value="${loginId}"></p>
+				<p><input type="hidden" name="userName" th:value="${userName}"></p>
+				<p><input type="hidden" name="icon" th:value="${icon}"></p>
+				<p><input type="hidden" name="profile" th:value="${profile}"></p>
 		</div>
 	</div>
 	</form>
