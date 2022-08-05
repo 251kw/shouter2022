@@ -25,7 +25,7 @@ public class LoginService {
 		
 		// ログインIDとパスワードを受け取り、データベース上に一致するユーザー情報があるか検索
 		ResultList = (List<UserLoginData>) entityManager
-				.createQuery(WHERE_LOGINID + "'" + loginId + "'" + "AND password =" + "'" + password + "'")
+				.createQuery(WHERE_LOGINID + "'" + loginId + "'" + AND_PASSWORD + "'" + password + "'")
 				.getResultList();
 		
 		return ResultList;

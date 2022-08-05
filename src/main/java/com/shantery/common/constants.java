@@ -24,6 +24,7 @@ public class constants {
 	public static final String AND_USERNAME = "AND userName LIKE";
 	public static final String AND_ICON = "AND icon =";
 	public static final String AND_PROFILE = "AND profile LIKE";
+	public static final String AND_PASSWORD = "AND password =";
 	
 	//iconの種類判断用
 	public static final String ICON_CHECKS = "checks";
