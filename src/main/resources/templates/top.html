@@ -1,0 +1,64 @@
+<!-- s.ogata -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="css/shouter.css">
+<title th:text="#{title.board.input}"></title>
+</head>
+<body>
+<div class="background">
+	<div class="text-center">
+		<strong th:text="title.board.input"></strong>&nbsp;<span class="bi bi-megaphone"></span>
+	</div>
+</div>
+<div class="text-center">
+	<h5　th:text="#{head.board.user}"></h5>
+</div>
+<!-- ログインユーザー情報　-->
+<div class="container-fluid">
+	<table border="1" class="table" th:object="${datalist}">
+		<tr>
+			<td rowspan="2" class="text-center"><span class="*{icon}"></span></td>
+			<td width="256" th:text="*{userName}"></td>
+			<td><input class="btn btn-light" type="submit" th:value="#{btn.logout}" /></td>
+		</tr>
+		<tr>
+			<td colspan="2" th:text="*{profile}"></td>
+		</tr>
+	</table>
+</div>
+<div class="text-center">
+<h5 th:text="#{head.board.shout}"></h5>
+</div>
+<form method="post">
+	<table class="table">
+		<tr>
+			<td><input class="form-control" type="text" name="shout" value="" size="60" /></td>
+			<td><input class="btn" type="submit" th:value="#{btn.shout}" th:formaction="@{/addshout}" /></td>
+		</tr>
+	</table>
+</form>
+<div class="text-center">
+	<h5 th:text="#{head.board.shouts}"></h5>
+</div>
+<div class="container-fluid">
+	<table class="table">
+		<tr th:each="shout : ${shoutlist}">
+			<td rowspan="2" class="text-center"><span class="${shout.icon} pe-3x pe-va"></span></td>
+			<td width="256" th:text="${shout.userName}"></td>
+		</tr>
+		<tr>
+			<td th:text="${shout.date}"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><textarea rows="5" class="form-control" th:text="${shout.writing}"></textarea></td>
+		</tr>
+		<p th:if="${error}" th:text="#{error.board.input}" class="error"></p>
+	</table>
+</div>
+</body>
+</html>

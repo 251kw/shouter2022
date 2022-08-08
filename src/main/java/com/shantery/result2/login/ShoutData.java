@@ -18,8 +18,8 @@ public class ShoutData {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="userId", nullable = false)
-	private Long userId;
+	@Column(name="shoutsid", nullable = false)
+	private Long shoutsId;
 	
 	@Column(name="username", nullable = false)
 	private String userName;
@@ -37,20 +37,20 @@ public class ShoutData {
 		
 	}
 	
-	public ShoutData(Long userId, String userName, String icon, String date, String writing) {
-		this.userId = userId;
+	public ShoutData(Long shoutsId, String userName, String icon, String date, String writing) {
+		this.shoutsId = shoutsId;
 		this.userName = userName;
 		this.icon = icon;
 		this.date = date;
 		this.writing = writing;
 	}
 	
-	public Long getUserId() {
-		return userId;
+	public Long getShoutsId() {
+		return shoutsId;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUserId(Long shoutsId) {
+		this.shoutsId = shoutsId;
 	}
 
 

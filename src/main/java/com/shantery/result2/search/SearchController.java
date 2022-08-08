@@ -29,12 +29,12 @@ public class SearchController {
 	@Autowired
 	private SearchService service;
 	
-	//index.htmlから送信されてくるのでpostになるので忘れるな！
+	//index.htmlから送信されてくるのでpost
 	@RequestMapping(value="/search",method=RequestMethod.POST)
 	public ModelAndView searchInput(@RequestParam(value="back",required=false)String back,
 									ModelAndView mav) {
 		if(back != null) {
-			mav.setViewName("sample");
+			mav.setViewName("index");
 		}else {
 			mav.setViewName(SEARCH_INPUT);
 			//最初の状態はどちらにもチェックなし
@@ -42,7 +42,7 @@ public class SearchController {
 		}
 		return mav;
 	}
-	
+
 	//検索条件が入力されたら、また検索結果画面で戻るボタンが押されたらpostで受け取る
 	//検索条件の保持、バリデーションチェック、検索メソッド呼び出し
 	//今後の変更点　リクエストマッピングのバリュー値

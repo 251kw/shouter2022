@@ -9,11 +9,10 @@
 	<link rel="stylesheet" href="http://localhost:8080/css/shouter.css">
 	<title th:text="#{title.board.input}"></title>
 </head>
-
 <body class="text-center">
 	<div class="background">
 		<div class="text-center">
-			<strong th:text="#{title.board.input}" class="text-white"></strong>
+			<strong th:text="#{title.board.input}" class="text-white"></strong>&nbsp;<span class="bi bi-megaphone icon"></span>
 		</div>
 	</div>
 	<form method="post" th:action="index">
@@ -21,22 +20,25 @@
 			<table border="1" class="table">
 				<tr>
 					<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
-					<td><input type="text" name="loginId" th:value="${loginId}" id="id" class="form-control"></td>
+					<td><input type="text" name="loginId" value="" id="id" class="form-control"></td>
 				</tr>
 				<tr>
 					<th th:text="#{table.password}" class="bi bi-key"><label for="password"></label></th>
-					<td><input type="text" name="password" th:value="${password}" id="password" class="form-control">
+					<td><input type="password" name="password" value="" id="password" class="form-control">
 					</td>
 				</tr>
 			</table>
-			<div class="text-center"><input class="btn btn-primary" type="submit" th:value="#{btn.login}" formaction="top" />
-				<input class="btn btn-primary" type="submit" th:value="#{btn.where.register}" formaction="UserInfoInput"/>
-				<input class="btn btn-primary" type="submit" th:value="#{btn.where.search}" th:formaction="@{/search}"/>
+			<div class="text-center" th:switch="${error}">
+				<input class="btn btn-primary btn-lg" type="submit" th:value="#{btn.login}" th:formaction="@{/shouter}" />
+				<p th:case="differentInfomation" th:text="#{error.write.miss}" class="error"></p>
+				<p th:case="blank" th:text="#{error.write.all}" class="error"></p>
+			</div>
+			<p></p>
+			<div class="text-center">
+				<input class="btn btn-primary btn-lg" type="submit" th:value="#{btn.where.register}" formaction="UserInfoInput"/>
+				<input class="btn btn-primary btn-lg" type="submit" th:value="#{btn.where.search}" th:formaction="@{/search}"/>
 			</div>
 		</div>
-		<p th:if="${error}" th:text="#{error.write.miss}" class="error"></p>
 	</form>
-
 </body>
-
 </html>
