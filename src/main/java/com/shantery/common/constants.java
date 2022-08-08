@@ -35,6 +35,7 @@ public class constants {
 	
 	//Entityクラスのテーブル名、フィールド名、カラム名
 	public static final String TABLE_USERS = "users";
+	public static final String TABLE_SHOUTS = "shouts";
 	public static final String FIELD_LOGINID = "loginId";
 	public static final String FIELD_USERNAME = "userName";
 	public static final String FIELD_ICON = "icon";
@@ -42,25 +43,30 @@ public class constants {
 	public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_LOGINID = "loginid";
 	public static final String COLUMN_USERNAME = "username";
+	public static final String COLUMN_SHOUTID = "shoutid";
 	
 	//コントローラー機能
 	public static final String FORM_MODEL = "formModel";
 	
 	//画面遷移先
-	public static final String SEARCH_RESULT = "UserSearchResult";
-	public static final String SEARCH_INPUT = "UserSearchInput";
+	public static final String DISPLAY_OF_INDEX = "index";
+	public static final String DISPLAY_OF_TOP = "top";
+	public static final String DISPLAY_OF_SEARCH_RESULT = "UserSearchResult";
+	public static final String DISPLAY_OF_SEARCH_INPUT = "UserSearchInput";
 	
 	//addObject,値保管時の第一引数名
 	public static final String ADDNAME_LOGINID = "loginId";
+	public static final String ADDNAME_PASSWORD = "password";
 	public static final String ADDNAME_USERNAME = "userName";
 	public static final String ADDNAME_ICON = "icon";
 	public static final String ADDNAME_PROFILE = "profile";
 	public static final String ADDNAME_DATALIST = "datalist";
+	public static final String ADDNAME_SHOUTLIST = "shoutlist";
 	public static final String ADDNAME_RESULT = "result";
 	public static final String ADDNAME_ERROR = "error";
 	
-	
-	
-	
+	//ログイン用判断フラグ
+	public static final String DIFFERENT_INFORMATION = "differinfo";
+	public static final String BLANK = "blank";
 	
 }

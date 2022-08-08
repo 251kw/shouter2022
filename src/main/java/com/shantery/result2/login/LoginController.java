@@ -1,5 +1,7 @@
 package com.shantery.result2.login;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shantery.result2.repositories.ShoutRepository;
+import static com.shantery.common.constants.*;
 
 
 /**
@@ -30,14 +33,9 @@ public class LoginController {
 	private LoginService service;
 	
 	//index.htmlへ接続
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String index() {
-		return "index";
-	}
-	
-	@RequestMapping(value = "/index", method = RequestMethod.POST)
-	public String indexback() {
-		return "index";
+		return DISPLAY_OF_INDEX;
 	}
 	
 	//新規登録画面へ遷移
@@ -48,64 +46,85 @@ public class LoginController {
 	}
 	
 	//ログイン画面で入力されたログインIDとパスワードをもとにユーザー情報を検索
-	//やること　バリデーションチェック、ユーザー情報の取得、シャウト情報の取得
 	@RequestMapping(value="/shouter", method=RequestMethod.POST)
-	public ModelAndView shouter(@RequestParam(value="loginId",required=true)String loginId,
-								@RequestParam(value="password",required=true)String password,
-								@ModelAttribute("formModel")@Validated UserLoginData userdata,
+	public ModelAndView shouter(@RequestParam(value=LOGINID,required=true)String loginId,
+								@RequestParam(value=PASSWORD,required=true)String password,
+								@ModelAttribute(FORM_MODEL)@Validated UserLoginData userdata,
 								BindingResult result,ModelAndView mav) {
+		//ログインチェック用フラグ
 		String logcheck = null;
 		if(!result.hasErrors()) {
-			//検索メソッド
+			//エラーなし(未入力がなかった場合)
+			//入力されたログインIDとパスワードに一致するユーザー情報を検索
 			List<UserLoginData> list = service.getAll(loginId, password);
 			if(list.size() != 0) {
-				//検索結果があればログインできる
-				mav.addObject("datalist", list);
-				//結果が入ったリストのサイズが0だったらエラー
+				//検索結果があればログインでき、結果を格納する
+				mav.addObject(ADDNAME_DATALIST, list);
 				//shoutsデーブルにあるデータをすべて取得し、結果を格納
-				List<ShoutData> shoutList = repository.findAll();
-				mav.addObject("shoutlist", shoutList);
-				mav.setViewName("top");
-				
+				List<ShoutData> shoutList = repository.findAllByOrderByDateDesc();
+				mav.addObject(ADDNAME_SHOUTLIST, shoutList);
+				//ログインしたユーザーの情報を保持
+				mav.addObject(ADDNAME_LOGINID, loginId);
+				mav.addObject(ADDNAME_PASSWORD, password);
+				//掲示板画面に遷移
+				mav.setViewName(DISPLAY_OF_TOP);
 			}else {
 				//検索結果のリストサイズが0だったらログインIDかパスワードが一致していないのでエラーを出す
-				logcheck = "differntInformation";
-				mav.addObject("error", logcheck);
-				mav.setViewName("index");
+				//ログインチェック用フラグで一致しなかったことを格納
+				logcheck = DIFFERENT_INFORMATION;
+				mav.addObject(ADDNAME_ERROR, logcheck);
+				//ログイン画面へ遷移して、エラーを表示させる
+				mav.setViewName(DISPLAY_OF_INDEX);
 			}
 		}else {
-			logcheck = "blank";
-			//未入力欄があったらエラー
-			mav.addObject("error", logcheck);
-			mav.setViewName("index");
+			//未入力の場合エラーを表示する
+			logcheck = BLANK;
+			mav.addObject(ADDNAME_ERROR, logcheck);
+			//ログイン画面へ遷移
+			mav.setViewName(DISPLAY_OF_INDEX);
 		}
 		return mav;
 	}	
 	
-	//データベースへ叫ぶボタンでshoutした内容を追加し、表示させる
-	//ヴァリデーションチェック、叫んだ内容追加、再表示用のリスト追加
+	//データベースに叫ぶボタンでshoutした内容を追加し、表示させる
 	@RequestMapping(value="/addshout",method=RequestMethod.POST)
 	@Transactional(readOnly=false)
-	public ModelAndView addshout(@RequestParam(value="shout",required=false)String writing,
-								 @ModelAttribute("formModel")@Validated ShoutData shoutdata,
+	public ModelAndView addshout(@RequestParam(value=LOGINID,required=false)String loginId,
+								 @RequestParam(value=PASSWORD,required=false)String password,
+								 @ModelAttribute(FORM_MODEL)@Validated ShoutData shoutdata,
 								 BindingResult result, ModelAndView mav) {
 		if(!result.hasErrors()) {
-			//エラーがなかったら叫んだ内容をデータベースに追加
+			//叫ぶ内容を入力していたらエラーなし
+			//叫んだ時の時刻を取得し、ShoutDataエンティティにセット
+			Calendar calender =Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
+			String date = sdf.format(calender.getTime());
+			shoutdata.setDate(date);
+			//叫んだ内容をデータベースに追加
 			repository.saveAndFlush(shoutdata);
-			List<ShoutData> shoutList = repository.findAll();
-			mav.addObject("shoutlist", shoutList);
+			
 		}else {
-			//エラーがあったらその結果を格納
-			mav.addObject("error", result.hasErrors());
+			//叫ぶ内容が未入力の場合、エラー結果を格納
+			mav.addObject(ADDNAME_ERROR, result.hasErrors());
 		}
-		mav.setViewName("top");
+		//再表示用のデータを取得し、リストに格納
+		List<UserLoginData> userdata = service.getAll(loginId, password);
+		mav.addObject(ADDNAME_DATALIST, userdata);
+		//新たに叫んだ内容を追加したデータを取得し、格納
+		List<ShoutData> shoutList = repository.findAllByOrderByDateDesc();
+		mav.addObject(ADDNAME_SHOUTLIST, shoutList);
+		//ログイン情報を保持
+		mav.addObject(LOGINID, loginId);
+		mav.addObject(PASSWORD, password);
+		//掲示板画面へ遷移
+		mav.setViewName(DISPLAY_OF_TOP);
 		return mav;
 	}
 	
 	//logoutボタンからindex.htmlに遷移
 	@RequestMapping(value="/logout",method=RequestMethod.POST)
 	public String logout() {
-		return "index";
+		return DISPLAY_OF_INDEX;
 	}
 }
 	

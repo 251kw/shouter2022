@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import static com.shantery.common.constants.*;
 
 /**
  * @author r.totoki
@@ -14,24 +15,24 @@ import javax.validation.constraints.NotEmpty;
  */
 
 @Entity
-@Table(name="shouts")
+@Table(name=TABLE_SHOUTS)
 public class ShoutData {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="shoutsid", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name=COLUMN_SHOUTID, nullable = false)
 	private Long shoutsId;
 	
-	@Column(name="username", nullable = false)
+	@Column(name=COLUMN_USERNAME, nullable = false)
 	private String userName;
 	
-	@Column(name="icon", nullable = false)
+	@Column(nullable = false)
 	private String icon;	
 	
-	@Column(name="date", nullable = false)
+	@Column(nullable = false)
 	private String date;	
 	
-	@Column(name="writing", nullable=false)
+	@Column(nullable=false)
 	@NotEmpty
 	private String writing; 
 	
