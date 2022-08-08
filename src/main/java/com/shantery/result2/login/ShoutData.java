@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * @author r.totoki
@@ -31,6 +32,7 @@ public class ShoutData {
 	private String date;	
 	
 	@Column(name="writing", nullable=false)
+	@NotEmpty
 	private String writing; 
 	
 	public ShoutData() {
