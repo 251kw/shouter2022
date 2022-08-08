@@ -17,22 +17,28 @@
 </div>
 <div class="container-fluid">
 	<form method="post" action="/UserUpdateConfirm">
+	<!-- 検索条件の保持　-->
+		<p><input type="hidden" name="loginId2" th:value="${loginId}"></p>
+		<p><input type="hidden" name="userName2" th:value="${userName}"></p>
+		<p><input type="hidden" name="icon2" th:value="${icon}"></p>
+		<p><input type="hidden" name="profile2" th:value="${profile}"></p>
+	
 	<div class="form-group">
-		<table border="1" class="table">
+		<!-- th:object="${userInfo}"でエラー管理 -->
+		<table border="1" class="table" th:object="${userInfo}">
 			<tr>
 				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
-				<td><input type="text" name="LoginId" th:value="${LoginId}" id="id" class="form-control">
-					<!-- ログインID保持 -->
-					<input type="hidden" name="loginID" th:value="${loginID}">
-					<!-- userId保持(更新時に使用) -->
-					<input type="hidden" name="userId" th:value="${userId}">
+				<td><input type="text" name="loginId" th:value="${LoginId}" id="id" class="form-control">
 					<!-- 既存のログインIDの場合エラー表示-->
-					<div th:if="${error}" th:text="#{error.update.input}" class="error"></div></td>
+					<div th:if="${errorloginID}" th:text="#{error.update.input}" class="error"></div>
+					<!-- ログインID未入力エラー -->
+					<div th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}" class="error"></div></td>
 			</tr>
 			<tr>
 				<th th:text="#{table.userName}" class="bi bi-person-circle"><label for="name"></label></th>
-				<td><input type="text" name="UserName" th:value="${UserName}" id="name" class="form-control">
-				<div th:if="${error}" th:text="#{}"></div></td>
+				<td><input type="text" name="userName" th:value="${UserName}" id="name" class="form-control">
+				<!-- ユーザー名未入力エラー -->
+				<div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="error"></div></td>
 			</tr>
 			<tr th:switch="${Icon}">
 				<th th:text="#{table.icon}" class="bi bi-emoji-smile"></th>
@@ -47,17 +53,19 @@
 			</tr>
 			<tr>
 				<th th:text="#{table.profile}" class="bi bi-card-text"><label for="profile"></label></th>
-				<td><input class="form-control" type="text" name="Profile" th:value="${Profile}" size="60" /></td>
+				<td><input class="form-control" type="text" name="profile" th:value="${Profile}" size="60" />
+				<!-- プロフィール未入力エラー -->
+				<div th:if="${#fields.hasErrors('profile')}" th:errors="*{profile}" class="error"></div></td>
 			</tr>
 		</table>
 		<div class="text-center">
 			<input type="submit" th:value="#{btn.OK}" class="btn btn-primary btn-lg">
 			<a th:href="@{/index}"><button type="submit" th:value="#{btn.OK}" class="btn btn-primary btn-lg"></button></a>
-				<!-- 検索条件の保持　-->
-				<p><input type="hidden" name="loginId" th:value="${loginId}"></p>
-				<p><input type="hidden" name="userName" th:value="${userName}"></p>
-				<p><input type="hidden" name="icon" th:value="${icon}"></p>
-				<p><input type="hidden" name="profile" th:value="${profile}"></p>
+				<!-- ログインID保持 -->
+				<input type="hidden" name="loginID" th:value="${loginID}">
+				<!-- userId保持(更新時に使用) -->
+				<input type="hidden" name="userId" th:value="${userId}">
+				
 		</div>
 	</div>
 	</form>
