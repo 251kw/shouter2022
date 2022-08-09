@@ -1,4 +1,5 @@
-<!--編集画面-->
+<!-- h.kasai
+	 編集画面 -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -17,12 +18,6 @@
 </div>
 <div class="container-fluid">
 	<form method="post" action="/UserUpdateConfirm">
-	<!-- 検索条件の保持　-->
-		<p><input type="hidden" name="loginId2" th:value="${loginId}"></p>
-		<p><input type="hidden" name="userName2" th:value="${userName}"></p>
-		<p><input type="hidden" name="icon2" th:value="${icon}"></p>
-		<p><input type="hidden" name="profile2" th:value="${profile}"></p>
-	
 	<div class="form-group">
 		<!-- th:object="${userInfo}"でエラー管理 -->
 		<table border="1" class="table" th:object="${userInfo}">
@@ -60,12 +55,16 @@
 		</table>
 		<div class="text-center">
 			<input type="submit" th:value="#{btn.OK}" class="btn btn-primary btn-lg">
-			<a th:href="@{/index}"><button type="submit" th:value="#{btn.OK}" class="btn btn-primary btn-lg"></button></a>
+			<input type="submit" th:value="#{btn.back}"  th:formaction="@{/resultback}" class="btn btn-primary btn-lg">
 				<!-- ログインID保持 -->
 				<input type="hidden" name="loginID" th:value="${loginID}">
 				<!-- userId保持(更新時に使用) -->
 				<input type="hidden" name="userId" th:value="${userId}">
-				
+				<!-- 検索条件の保持　-->
+				<p><input type="hidden" name="loginId2" th:value="${loginId}"></p>
+				<p><input type="hidden" name="userName2" th:value="${userName}"></p>
+				<p><input type="hidden" name="icon2" th:value="${icon}"></p>
+				<p><input type="hidden" name="profile2" th:value="${profile}"></p>
 		</div>
 	</div>
 	</form>
