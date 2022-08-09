@@ -141,4 +141,17 @@ public class SearchController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value="/resultback",method=RequestMethod.POST)
+	public ModelAndView resultback(@RequestParam(value="loginId2")String loginId,
+								   @RequestParam(value="userName2")String userName,
+								   @RequestParam(value="icon2")String icon,
+								   @RequestParam(value="profile2")String profile,
+								   ModelAndView mav) {
+		List<UserData> list = service.getAll(loginId, userName, icon, profile);
+		mav.addObject("datalist", list);
+		mav.setViewName("UserSearchReasult");
+		return mav;
+	}
+	
 }
