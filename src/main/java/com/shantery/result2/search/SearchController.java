@@ -149,12 +149,35 @@ public class SearchController {
 								   @RequestParam(value="icon2")String icon,
 								   @RequestParam(value="profile2")String profile,
 								   ModelAndView mav) {
-		List<UserData> list = service.getAll(loginId, userName, icon, profile);
-		mav.addObject(ADDNAME_DATALIST, list);
+		//検索条件の保持
 		mav.addObject("loginId", loginId);
 		mav.addObject("userName", userName);
 		mav.addObject("icon", icon);
 		mav.addObject("profile", profile);
+		//アイコン1種類の時用リスト
+		List<UserData> list = null;
+		//アイコンが2種類選択された時用の追加リスト
+		List<UserData> list2 = null;
+		//listとlist2を結合させたリスト
+		List<UserData> lists = null;
+		if(icon.equals("noCheck")) {
+			//チェックなしの場合は空文字にする
+			icon = "";
+			lists = service.getAll(loginId, userName, icon, profile);
+		}else if(icon.equals("checks")) {
+			icon = "icon-male";
+			//icon-maleの場合の検索結果
+			list = service.getAll(loginId, userName, icon, profile);
+			icon = "icon-female";
+			//icon-femaleの場合の検索結果
+			list2 = service.getAll(loginId, userName, icon, profile);
+			//2種類のアイコンで検索した結果を結合したリスト
+			lists = Stream.concat(list.stream(), list2.stream()).collect(Collectors.toList());
+		}else {
+			//icon-male.icon-femaleのどちらか
+			lists = service.getAll(loginId, userName, icon, profile);
+		}
+		mav.addObject(ADDNAME_DATALIST, lists);
 		mav.setViewName(DISPLAY_OF_SEARCH_RESULT);
 		return mav;
 	}
