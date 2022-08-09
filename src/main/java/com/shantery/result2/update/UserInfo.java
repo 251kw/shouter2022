@@ -20,18 +20,18 @@ public class UserInfo {
 	private Long userId;
 	
 	@Column(name="loginid", nullable = false, unique = true)
-	@NotEmpty	
+	@NotEmpty
 	private String loginId;
 
-	@Column(name="username", nullable = true)
+	@Column(name="username", nullable = false)
 	@NotEmpty
 	private String userName;
 
-	@Column(name="icon", nullable = true)
+	@Column(name="icon", nullable = false)
 	@NotNull
 	private String icon;
 
-	@Column(name="profile", nullable = true)
+	@Column(name="profile", nullable = false)
 	@NotEmpty
 	private String profile;
 	
