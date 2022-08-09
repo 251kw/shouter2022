@@ -150,7 +150,7 @@ public class SearchController {
 								   ModelAndView mav) {
 		List<UserData> list = service.getAll(loginId, userName, icon, profile);
 		mav.addObject("datalist", list);
-		mav.setViewName("UserSearchReasult");
+		mav.setViewName("UserSearchResult");
 		return mav;
 	}
 	
