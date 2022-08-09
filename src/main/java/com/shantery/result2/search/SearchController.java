@@ -141,4 +141,22 @@ public class SearchController {
 		}
 		return mav;
 	}
+	
+	//編集入力、削除確認から検索結果に戻るときの検索メソッド
+	@RequestMapping(value="/resultback",method=RequestMethod.POST)
+	public ModelAndView resultback(@RequestParam(value="loginId2")String loginId,
+								   @RequestParam(value="userName2")String userName,
+								   @RequestParam(value="icon2")String icon,
+								   @RequestParam(value="profile2")String profile,
+								   ModelAndView mav) {
+		List<UserData> list = service.getAll(loginId, userName, icon, profile);
+		mav.addObject(ADDNAME_DATALIST, list);
+		mav.addObject("loginId", loginId);
+		mav.addObject("userName", userName);
+		mav.addObject("icon", icon);
+		mav.addObject("profile", profile);
+		mav.setViewName(DISPLAY_OF_SEARCH_RESULT);
+		return mav;
+	}
+	
 }
