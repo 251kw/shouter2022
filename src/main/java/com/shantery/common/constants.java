@@ -43,7 +43,7 @@ public class constants {
 	public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_LOGINID = "loginid";
 	public static final String COLUMN_USERNAME = "username";
-	public static final String COLUMN_SHOUTID = "shoutid";
+	public static final String COLUMN_SHOUTSID = "shoutsid";
 	
 	//コントローラー機能
 	public static final String FORM_MODEL = "formModel";

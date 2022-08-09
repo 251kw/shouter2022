@@ -20,7 +20,7 @@ public class ShoutData {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name=COLUMN_SHOUTID, nullable = false)
+	@Column(name=COLUMN_SHOUTSID, nullable = false)
 	private Long shoutsId;
 	
 	@Column(name=COLUMN_USERNAME, nullable = false)
