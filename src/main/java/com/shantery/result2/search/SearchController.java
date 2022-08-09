@@ -31,15 +31,10 @@ public class SearchController {
 	
 	//index.htmlから送信されてくるのでpost
 	@RequestMapping(value="/search",method=RequestMethod.POST)
-	public ModelAndView searchInput(@RequestParam(value=DISPLAY_BACK,required=false)String back,
-									ModelAndView mav) {
-		if(back != null) {
-			mav.setViewName(DISPLAY_OF_INDEX);
-		}else {
-			mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
-			//最初の状態はどちらにもチェックなし
-			mav.addObject(ADDNAME_ICON, ICON_NOCHECK);
-		}
+	public ModelAndView searchInput(ModelAndView mav) {
+		mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
+		//最初の状態はどちらにもチェックなし
+		mav.addObject(ADDNAME_ICON, ICON_NOCHECK);
 		return mav;
 	}
 
@@ -67,7 +62,7 @@ public class SearchController {
 		}
 		//検索結果画面で戻るボタンが押されたら
 		if(back != null) {
-			mav.setViewName(DISPLAY_OF_INDEX);
+			mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
 			//検索条件保持
 			mav.addObject(ADDNAME_LOGINID,loginId);
 			mav.addObject(ADDNAME_USERNAME, userName);

@@ -15,6 +15,7 @@
 		<strong th:text="#{title.search.input}" class="text-white"></strong>
 	</div>
 </div>
+<!-- 検索条件入力欄　-->
 <div class="container-fluid">
 	<form method="post" action="/">
 	<div class="form-group">
@@ -56,6 +57,7 @@
 			<input type="submit" th:value="#{btn.back}" th:formaction="@{/index}"class="btn btn-primary btn-lg">
 		</div>
 	</div>
+	<!-- 検索条件が一つも入っていなかったらエラーを表示-->
 	<p th:if="${error}" th:text="#{error.search.input}" class="error"></p>
 	</form>	
 </div>
