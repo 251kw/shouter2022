@@ -15,6 +15,7 @@ public class constants {
 	
 	//戻るボタンのvalue値
 	public static final String DISPLAY_BACK = "back";
+	public static final String DISPLAY_BACKS = "backs";
 	
 	//　SQL文関連
 	public static final String WHERE_LOGINID = "from UserData where loginId =";
@@ -53,6 +54,9 @@ public class constants {
 	public static final String DISPLAY_OF_TOP = "top";
 	public static final String DISPLAY_OF_SEARCH_RESULT = "UserSearchResult";
 	public static final String DISPLAY_OF_SEARCH_INPUT = "UserSearchInput";
+	public static final String DISPLAY_OF_USERINFO_INPUT = "UserInfoInput";
+	public static final String DISPLAY_OF_USERINFO_CONFIRM = "UserInfoConfirm";
+	public static final String DISPLAY_OF_USERINFO_RESULT = "UserInfoResult";
 	
 	//addObject,値保管時の第一引数名
 	public static final String ADDNAME_LOGINID = "loginId";
@@ -68,5 +72,8 @@ public class constants {
 	//ログイン用判断フラグ
 	public static final String DIFFERENT_INFORMATION = "differinfo";
 	public static final String BLANK = "blank";
+	
+	//新規登録用判断フラグ
+	public static final String INFO_CHECK = "info";
 	
 }

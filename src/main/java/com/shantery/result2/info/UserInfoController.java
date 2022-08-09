@@ -87,6 +87,7 @@ public class UserInfoController {
 				mav.addObject("userName", userName);
 				mav.addObject("icon", icon);
 				mav.addObject("profile", profile);
+				//新規登録入力画面へ遷移
 				mav.setViewName("UserInfoInput");
 			} else {
 				mav.addObject("loginId", loginId);
@@ -94,6 +95,7 @@ public class UserInfoController {
 				mav.addObject("userName", userName);
 				mav.addObject("icon", icon);
 				mav.addObject("profile", profile);
+				//新規登録確認画面へ遷移
 				mav.setViewName("UserInfoConfirm");
 			}
 		}
