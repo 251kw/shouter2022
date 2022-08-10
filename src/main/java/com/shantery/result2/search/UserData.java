@@ -41,6 +41,7 @@ public class UserData {
 		
 	}
 	
+	//更新時に使用
 	public UserData(Long userId, String loginId, String userName, String icon, String profile) {
 		this.userId = userId;
 		this.loginId = loginId;
