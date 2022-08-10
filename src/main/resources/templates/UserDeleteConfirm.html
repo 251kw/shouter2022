@@ -25,7 +25,8 @@
 				<th th:text="#{table.profile}" class="bi bi-card-text"></th>	
 			</tr>
 			<tr th:each="obj : ${datalist}" th:switch="${obj.icon}">
-				<td th:text=${obj.loginId}></td>		
+				<td th:text=${obj.loginId}></td>
+				<p><input type="hidden" name="userId" th:value="${obj.userId}"></p>		
 				<td th:text=${obj.userName}></td>
 				<td th:case="icon-male"><span class="bi bi-gender-male"></span></td>
 				<td th:case="icon-female"><span class="bi bi-gender-female"></span></td>
@@ -34,7 +35,7 @@
 		</table>
 		<div class="text-center">
 			<input type="submit" th:value="#{btn.delete}"  th:formaction="@{/deleteResult}"class="btn btn-primary btn-lg">
-			<input type="submit" name="back" th:value="#{btn.back}" th:formaction="@{/resultback}" class="btn btn-primary btn-lg">
+			<input type="submit" th:value="#{btn.back}" th:formaction="@{/resultback}" class="btn btn-primary btn-lg">
 		</div>
 		<!-- 検索条件の保持 -->
 		<p><input type="hidden" name="loginId2" th:value="${loginId}"></p>
