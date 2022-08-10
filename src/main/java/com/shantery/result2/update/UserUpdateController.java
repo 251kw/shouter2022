@@ -48,14 +48,14 @@ public class UserUpdateController {
 		mav.addObject(ADDNAME_PROFILE, profile);	//"profile"
 		
 		//編集ボタンから渡されたデータ
-		mav.addObject("userId", userId);			//"userId"
-		mav.addObject("LoginId", LoginId);			//"LoginId"
-		mav.addObject("loginID", loginID);			//"loginID"
-		mav.addObject("UserName", UserName);		//"UserName"
-		mav.addObject("Icon", Icon);				//"Icon"
-		mav.addObject("Profile", Profile);			//"Profile"
-		mav.addObject(USER_INFO, userInfo);			//"userInfo"
-		mav.setViewName(DISPLAY_OF_UPDATE_INPUT);	//"UserUpdateInput"
+		mav.addObject(ADDNAME_UPDATE_USERID, userId);						//"userId"
+		mav.addObject(ADDNAME_UPDATE_AFTER_LOGINID, LoginId);	//"LoginId"
+		mav.addObject(ADDNAME_UPDATE_BEFORE_LOGINID, loginID);	//"loginID"
+		mav.addObject(ADDNAME_UPDATE_USERNAME, UserName);		//"UserName"
+		mav.addObject(ADDNAME_UPDATE_ICON, Icon);				//"Icon"
+		mav.addObject(ADDNAME_UPDATE_PROFILE, Profile);			//"Profile"
+		mav.addObject(USER_INFO, userInfo);						//"userInfo"
+		mav.setViewName(DISPLAY_OF_UPDATE_INPUT);				//"UserUpdateInput"
 		return mav;
 	}
 	
@@ -69,8 +69,8 @@ public class UserUpdateController {
 								  @RequestParam(name=PROFILE) String profile,	//"profile"
 								  @Validated @ModelAttribute UserInfo userInfo,
 			  					  BindingResult result,
-								  @RequestParam(name="userId") String userId,
-								  @RequestParam(name="loginID") String loginID,	//変更前(編集画面に遷移して一番初めに表示されるログインID)
+								  @RequestParam(name=USERID) String userId,		//"userId"
+								  @RequestParam(name=UPDATE_BEFORE_LOGINID) String loginID,	//変更前(編集画面に遷移して一番初めに表示されるログインID)
 								  //検索条件の保持
 								  @RequestParam(name=LOGINID2) String loginId2,		//"loginId2"
 								  @RequestParam(name=USERNAME2) String userName2,	//"userName2"
@@ -90,12 +90,12 @@ public class UserUpdateController {
 		mav.addObject(ADDNAME_PROFILE, profile2);		//"profile"
 		
 		//編集条件の保持
-		mav.addObject("userId", userId);				//"userId"
-		mav.addObject("LoginId", loginId);				//変更後
-		mav.addObject("loginID", loginID);				//変更前(編集画面に遷移して一番初めに表示されるログインID)
-		mav.addObject("UserName", userName);			//"UserName"
-		mav.addObject("Icon", Icon);					//"Icon"
-		mav.addObject("Profile", profile);				//"Profile"
+		mav.addObject(ADDNAME_UPDATE_USERID, userId);						//"userId"
+		mav.addObject(ADDNAME_UPDATE_AFTER_LOGINID, loginId);	//変更後
+		mav.addObject(ADDNAME_UPDATE_BEFORE_LOGINID, loginID);	//変更前(編集画面に遷移して一番初めに表示されるログインID)
+		mav.addObject(ADDNAME_UPDATE_ICON, userName);			//"UserName"
+		mav.addObject(ADDNAME_UPDATE_ICON, Icon);				//"Icon"
+		mav.addObject(ADDNAME_UPDATE_PROFILE, profile);			//"Profile"
 		
 		//フィールド毎にバリテーションチェック
 		//全て入力されていた場合
@@ -128,12 +128,12 @@ public class UserUpdateController {
 								 @RequestParam(name=ICON) String icon,				//icon
 								 @RequestParam(name=PROFILE) String profile,		//profile
 								 //更新内容から送られてくる編集内容
-								 @RequestParam(name="userId") Long id,
-								 @RequestParam(name="LoginId") String LoginId,
-								 @RequestParam(name="loginID") String loginID,
-								 @RequestParam(name="UserName") String UserName,
-								 @RequestParam(name="Icon") String Icon,
-								 @RequestParam(name="Profile") String Profile,
+								 @RequestParam(name=UPDATE_USERID) Long id,					//userId
+								 @RequestParam(name=UPDATE_AFTER_LOGINID) String LoginId,	//"LoginId"
+								 @RequestParam(name=UPDATE_BEFORE_LOGINID) String loginID,	//"loginID"
+								 @RequestParam(name=UPDATE_USERNAME) String UserName,		//"UserName"
+								 @RequestParam(name=UPDATE_ICON) String Icon,				//"Icon"
+								 @RequestParam(name=UPDATE_PROFILE) String Profile,			//"Profile"
 								 @ModelAttribute UserInfo userInfo,
 								 ModelAndView mav
 								 ) {
@@ -144,12 +144,12 @@ public class UserUpdateController {
 		mav.addObject(ADDNAME_PROFILE, profile);
 		
 		//更新内容
-		mav.addObject("userId",id);					//"userId"
-		mav.addObject("LoginId", LoginId);			//"LoginId"
-		mav.addObject("loginID", loginID);			//"loginID"
-		mav.addObject("UserName", UserName);		//"Icon"
-		mav.addObject("Icon", Icon);				//"Profile"
-		mav.addObject("Profile", Profile);
+		mav.addObject(ADDNAME_UPDATE_USERID,id);								//"userId"
+		mav.addObject(ADDNAME_UPDATE_AFTER_LOGINID, LoginId);	//"LoginId"
+		mav.addObject(ADDNAME_UPDATE_BEFORE_LOGINID, loginID);			//"loginID"
+		mav.addObject(ADDNAME_UPDATE_USERNAME, UserName);		//"UserName"
+		mav.addObject(ADDNAME_UPDATE_ICON, Icon);				//"Icon"
+		mav.addObject(ADDNAME_UPDATE_PROFILE, Profile);			//"Profile"
 		
 		mav.addObject(USER_INFO, userInfo);			//"userInfo"
 		mav.setViewName(DISPLAY_OF_UPDATE_INPUT);	//"UserUpdateInput"
@@ -166,21 +166,21 @@ public class UserUpdateController {
 									 @RequestParam(name=ICON) String icon,				//icon
 									 @RequestParam(name=PROFILE) String profile,		//profile
 									 //更新条件の保持
-									 @RequestParam(name="userId") Long userId,
-									 @RequestParam(name="LoginId") String LoginId,
-									 @RequestParam(name="UserName") String UserName,
-									 @RequestParam(name="Icon") String Icon,
-									 @RequestParam(name="Profile") String Profile,
+									 @RequestParam(name=UPDATE_USERID) Long userId,			//"userId"
+									 @RequestParam(name=UPDATE_AFTER_LOGINID) String LoginId,		//"LoginId"
+									 @RequestParam(name=UPDATE_USERNAME) String UserName,	//"UserName"
+									 @RequestParam(name=UPDATE_ICON) String Icon,			//"Icon"
+									 @RequestParam(name=UPDATE_PROFILE) String Profile,		//"Profile"
 									 ModelAndView mav) {
 		//更新
 		UserInfo user = new UserInfo(userId, LoginId, UserName, Icon, Profile);
 		repository.saveAndFlush(user);
 		
 		//更新結果画面表示
-		mav.addObject("LoginId", LoginId);		//"LoginId"
-		mav.addObject("UserName", UserName);	//"UserName"
-		mav.addObject("Icon", Icon);			//"Icon"
-		mav.addObject("Profile", Profile);		//"Profile"
+		mav.addObject(ADDNAME_UPDATE_AFTER_LOGINID, LoginId);		//"LoginId"
+		mav.addObject(ADDNAME_UPDATE_USERNAME, UserName);	//"UserName"
+		mav.addObject(ADDNAME_UPDATE_ICON, Icon);			//"Icon"
+		mav.addObject(ADDNAME_UPDATE_PROFILE, Profile);		//"Profile"
 		
 		//検索条件保持
 		mav.addObject(ADDNAME_LOGINID, loginId);	//"loginId"

@@ -2,6 +2,7 @@ package com.shantery.common;
 
 public class constants {
 	//name属性名
+	public static final String USERID = "userId";
 	public static final String LOGINID = "loginId";
 	public static final String USERNAME = "userName";
 	public static final String PASSWORD = "password";
@@ -72,6 +73,12 @@ public class constants {
 	public static final String ADDNAME_SHOUTLIST = "shoutlist";
 	public static final String ADDNAME_RESULT = "result";
 	public static final String ADDNAME_ERROR = "error";
+	public static final String ADDNAME_UPDATE_USERID = "userId";
+	public static final String ADDNAME_UPDATE_BEFORE_LOGINID = "loginID";
+	public static final String ADDNAME_UPDATE_AFTER_LOGINID = "LoginId";
+	public static final String ADDNAME_UPDATE_USERNAME = "UserName";
+	public static final String ADDNAME_UPDATE_ICON = "Icon";
+	public static final String ADDNAME_UPDATE_PROFILE = "Profile";
 	
 	//ログイン用判断フラグ
 	public static final String DIFFERENT_INFORMATION = "differinfo";
@@ -85,4 +92,12 @@ public class constants {
 	public static final String USERNAME2 = "userName2";
 	public static final String ICON2 = "icon2";
 	public static final String PROFILE2 = "profile2";
+	
+	//更新情報保持
+	public static final String UPDATE_USERID = "userId";
+	public static final String UPDATE_AFTER_LOGINID = "LoginId";
+	public static final String UPDATE_BEFORE_LOGINID = "loginID";
+	public static final String UPDATE_USERNAME = "UserName";
+	public static final String UPDATE_ICON = "Icon";
+	public static final String UPDATE_PROFILE = "Profile";
 }
