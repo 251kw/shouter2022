@@ -103,6 +103,6 @@ public class constants {
 	public static final String UPDATE_ICON = "Icon";
 	public static final String UPDATE_PROFILE = "Profile";
 	
-	//チェックボックス判断用フラグ
+	//チェックボックス用判断フラグ
 	public static final String CHECKBOX_NOCHECK = "noCheck";
 }
