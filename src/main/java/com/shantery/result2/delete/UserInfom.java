@@ -41,12 +41,17 @@ public class UserInfom {
 	public UserInfom() {
 		
 	}
+	// 削除に使用
+	public UserInfom(Long userId) {
+		this.userId = userId;
+	}
 	
-	public UserInfom(String loginId, String userName, String icon, String profile) {
-		this.loginId = loginId;
-		this.userName = userName;
-		this.icon = icon;
-		this.profile = profile;
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 	
 	public String getLoginId() {
@@ -80,5 +85,4 @@ public class UserInfom {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	
 }
