@@ -64,6 +64,7 @@ public class constants {
 	public static final String DISPLAY_OF_UPDATE_RESULT = "UserUpdateResult";
 	
 	//addObject,値保管時の第一引数名
+	public static final String ADDNAME_USERID = "userId";
 	public static final String ADDNAME_LOGINID = "loginId";
 	public static final String ADDNAME_PASSWORD = "password";
 	public static final String ADDNAME_USERNAME = "userName";
@@ -73,6 +74,7 @@ public class constants {
 	public static final String ADDNAME_SHOUTLIST = "shoutlist";
 	public static final String ADDNAME_RESULT = "result";
 	public static final String ADDNAME_ERROR = "error";
+	public static final String ADDNAME_CHECKBOX = "checkbox";
 	public static final String ADDNAME_UPDATE_USERID = "userId";
 	public static final String ADDNAME_UPDATE_BEFORE_LOGINID = "loginID";
 	public static final String ADDNAME_UPDATE_AFTER_LOGINID = "LoginId";
@@ -100,4 +102,7 @@ public class constants {
 	public static final String UPDATE_USERNAME = "UserName";
 	public static final String UPDATE_ICON = "Icon";
 	public static final String UPDATE_PROFILE = "Profile";
+	
+	//チェックボックス判断用フラグ
+	public static final String CHECKBOX_NOCHECK = "noCheck";
 }

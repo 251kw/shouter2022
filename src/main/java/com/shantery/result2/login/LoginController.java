@@ -38,13 +38,6 @@ public class LoginController {
 		return DISPLAY_OF_INDEX;
 	}
 	
-	//新規登録画面へ遷移
-	@RequestMapping(value = "/Info", method = RequestMethod.POST)
-	public ModelAndView UserInfoInput(ModelAndView mav) {
-		mav.setViewName("UserInfoInput");
-		return mav;
-	}
-	
 	//ログイン画面で入力されたログインIDとパスワードをもとにユーザー情報を検索
 	@RequestMapping(value="/shouter", method=RequestMethod.POST)
 	public ModelAndView shouter(@RequestParam(value=LOGINID,required=true)String loginId,
@@ -97,7 +90,7 @@ public class LoginController {
 			//叫ぶ内容を入力していたらエラーなし
 			//叫んだ時の時刻を取得し、ShoutDataエンティティにセット
 			Calendar calender =Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			String date = sdf.format(calender.getTime());
 			shoutdata.setDate(date);
 			//叫んだ内容をデータベースに追加

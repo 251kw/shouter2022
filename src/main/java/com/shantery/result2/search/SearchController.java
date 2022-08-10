@@ -69,7 +69,7 @@ public class SearchController {
 			mav.addObject(ADDNAME_USERNAME, userName);
 			mav.addObject(ADDNAME_ICON, icons[0]);
 			mav.addObject(ADDNAME_PROFILE, profile);
-			mav.addObject("checkbox","noCheck");
+			mav.addObject(ADDNAME_CHECKBOX,CHECKBOX_NOCHECK);
 		}else {
 			if(!result.hasErrors()) {
 				//エラーがなかったら
@@ -141,32 +141,34 @@ public class SearchController {
 				mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
 			}
 		}
-		mav.addObject("checkbox", "noCheck");
+		mav.addObject(ADDNAME_CHECKBOX, CHECKBOX_NOCHECK);
 		return mav;
 	}
 	
 	//編集入力、更新結果、削除確認、削除結果から検索結果に戻るときの再検索メソッド
 	@RequestMapping(value="/resultback",method=RequestMethod.POST)
-	public ModelAndView resultback(@RequestParam(value="loginId2")String loginId,
-								   @RequestParam(value="userName2")String userName,
-								   @RequestParam(value="icon2")String icon,
-								   @RequestParam(value="profile2")String profile,
-								   @RequestParam(value="userId",required=false)Long[] userId,
-								   @RequestParam(value="back",required=false)String back,
+	public ModelAndView resultback(@RequestParam(value=LOGINID2)String loginId,
+								   @RequestParam(value=USERNAME2)String userName,
+								   @RequestParam(value=ICON2)String icon,
+								   @RequestParam(value=PROFILE2)String profile,
+								   @RequestParam(value=USERID,required=false)Long[] userId,
+								   @RequestParam(value=DISPLAY_BACK,required=false)String back,
 								   ModelAndView mav) {
 		//検索条件の保持
-		mav.addObject("loginId", loginId);
-		mav.addObject("userName", userName);
-		mav.addObject("icon", icon);
-		mav.addObject("profile", profile);
+		mav.addObject(ADDNAME_LOGINID, loginId);
+		mav.addObject(ADDNAME_USERNAME, userName);
+		mav.addObject(ADDNAME_ICON, icon);
+		mav.addObject(ADDNAME_PROFILE, profile);
 		if(back != null) {
-			mav.addObject("checkbox", "noCheck");
+			//編集機能ではチェックボックスは関係ないので
+			mav.addObject(ADDNAME_CHECKBOX, CHECKBOX_NOCHECK);
 		}else {
+			//削除項目のチェックボックスの保持
 			ArrayList<Long> checkboxList = new ArrayList<Long>();
-			for(Long checknum: userId) {
-				checkboxList.add(checknum);
+			for(Long checkboxNum: userId) {
+				checkboxList.add(checkboxNum);
 			}
-			mav.addObject("checkbox", checkboxList);
+			mav.addObject(ADDNAME_CHECKBOX, checkboxList);
 		}
 			
 		//アイコン1種類の時用リスト
@@ -175,15 +177,15 @@ public class SearchController {
 		List<UserData> list2 = null;
 		//listとlist2を結合させたリスト
 		List<UserData> lists = null;
-		if(icon.equals("noCheck")) {
+		if(icon.equals(ICON_NOCHECK)) {
 			//チェックなしの場合は空文字にする
 			icon = "";
 			lists = service.getAll(loginId, userName, icon, profile);
-		}else if(icon.equals("checks")) {
-			icon = "icon-male";
+		}else if(icon.equals(ICON_CHECKS)) {
+			icon = ICON_MALE;
 			//icon-maleの場合の検索結果
 			list = service.getAll(loginId, userName, icon, profile);
-			icon = "icon-female";
+			icon = ICON_FEMALE;
 			//icon-femaleの場合の検索結果
 			list2 = service.getAll(loginId, userName, icon, profile);
 			//2種類のアイコンで検索した結果を結合したリスト
@@ -196,5 +198,4 @@ public class SearchController {
 		mav.setViewName(DISPLAY_OF_SEARCH_RESULT);
 		return mav;
 	}
-	
 }

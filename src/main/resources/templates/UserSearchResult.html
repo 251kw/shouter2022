@@ -31,6 +31,7 @@
 			</tr>
 			<tr th:each="obj : ${datalist}" th:switch="${obj.icon}">
 				<td th:each="checkbox : ${checkbox}" th:switch="${checkbox}">
+				<!-- 削除確認から検索結果に戻る時のチェックボックスの保持　チェックされた削除項目のuserIdと検索結果のuserIdが一致していたらチェックされる -->
 				<input  th:case="${obj.userId}"type="checkbox" name="checkbox" th:value="${obj.userId}" checked>
 				<input th:case="noCheck" type="checkbox" name="checkbox" th:value="${obj.userId}"></td>
 				<td th:text=${obj.loginId}></td>		
