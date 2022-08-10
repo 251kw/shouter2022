@@ -142,7 +142,7 @@ public class SearchController {
 				mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
 			}
 		}
-		mav.addObject(ADDNAME_CHECKBOX, CHECKBOX_NOCHECK);
+		mav.addObject("check", false);
 		return mav;
 	}
 	
@@ -162,13 +162,14 @@ public class SearchController {
 		mav.addObject(ADDNAME_PROFILE, profile);
 		if(back != null) {
 			//編集機能ではチェックボックスは関係ないので
-			mav.addObject(ADDNAME_CHECKBOX, CHECKBOX_NOCHECK);
+			mav.addObject("check", false);
 		}else {
 			//削除項目のチェックボックスの保持
 			ArrayList<Long> checkboxList = new ArrayList<Long>();
 			for(Long checkboxNum: userId) {
 				checkboxList.add(checkboxNum);
 			}
+			mav.addObject("check", true);
 			mav.addObject(ADDNAME_CHECKBOX, checkboxList);
 		}
 			
