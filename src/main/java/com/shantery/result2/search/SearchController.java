@@ -21,6 +21,7 @@ import static com.shantery.common.constants.*;
  * @author s.ogata
  *
  */
+
 @Controller
 public class SearchController {
 	
