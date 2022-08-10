@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotEmpty;
 
+import static com.shantery.common.constants.*;
+
 @Entity
 @Table(name = "users")
 
@@ -16,14 +18,14 @@ public class UserInfo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="userid")
+	@Column(name=COLUMN_USERID)
 	private Long userId;
 	
-	@Column(name="loginid", nullable = false, unique = true)
+	@Column(name=COLUMN_LOGINID, nullable = false, unique = true)
 	@NotEmpty
 	private String loginId;
 
-	@Column(name="username", nullable = false)
+	@Column(name=COLUMN_USERNAME, nullable = false)
 	@NotEmpty
 	private String userName;
 

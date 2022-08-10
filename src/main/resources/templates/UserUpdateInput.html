@@ -25,7 +25,7 @@
 				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
 				<td><input type="text" name="loginId" th:value="${LoginId}" id="id" class="form-control">
 					<!-- 既存のログインIDの場合エラー表示-->
-					<div th:if="${errorloginID}" th:text="#{error.update.input}" class="error"></div>
+					<div th:if="${error}" th:text="#{error.update.input}" class="error"></div>
 					<!-- ログインID未入力エラー -->
 					<div th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}" class="error"></div></td>
 			</tr>

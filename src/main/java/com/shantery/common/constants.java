@@ -48,6 +48,7 @@ public class constants {
 	
 	//コントローラー機能
 	public static final String FORM_MODEL = "formModel";
+	public static final String USER_INFO= "userInfo";
 	
 	//画面遷移先
 	public static final String DISPLAY_OF_INDEX = "index";
@@ -57,6 +58,9 @@ public class constants {
 	public static final String DISPLAY_OF_USERINFO_INPUT = "UserInfoInput";
 	public static final String DISPLAY_OF_USERINFO_CONFIRM = "UserInfoConfirm";
 	public static final String DISPLAY_OF_USERINFO_RESULT = "UserInfoResult";
+	public static final String DISPLAY_OF_UPDATE_INPUT = "UserUpdateInput";
+	public static final String DISPLAY_OF_UPDATE_CONFIRM = "UserUpdateConfirm";
+	public static final String DISPLAY_OF_UPDATE_RESULT = "UserUpdateResult";
 	
 	//addObject,値保管時の第一引数名
 	public static final String ADDNAME_LOGINID = "loginId";
@@ -76,4 +80,9 @@ public class constants {
 	//新規登録用判断フラグ
 	public static final String INFO_CHECK = "info";
 	
+	//検索条件保持
+	public static final String LOGINID2 = "loginId2";
+	public static final String USERNAME2 = "userName2";
+	public static final String ICON2 = "icon2";
+	public static final String PROFILE2 = "profile2";
 }
