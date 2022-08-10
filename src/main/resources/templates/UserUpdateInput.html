@@ -55,7 +55,7 @@
 		</table>
 		<div class="text-center">
 			<input type="submit" th:value="#{btn.OK}" class="btn btn-primary btn-lg">
-			<input type="submit" th:value="#{btn.back}"  th:formaction="@{/resultback}" class="btn btn-primary btn-lg">
+			<input type="submit" th:value="#{btn.back}"  name="back" th:formaction="@{/resultback}" class="btn btn-primary btn-lg">
 				<!-- ログインID保持 -->
 				<input type="hidden" name="loginID" th:value="${loginID}">
 				<!-- userId保持(更新時に使用) -->

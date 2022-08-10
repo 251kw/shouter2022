@@ -1,5 +1,6 @@
 package com.shantery.result2.search;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -68,6 +69,7 @@ public class SearchController {
 			mav.addObject(ADDNAME_USERNAME, userName);
 			mav.addObject(ADDNAME_ICON, icons[0]);
 			mav.addObject(ADDNAME_PROFILE, profile);
+			mav.addObject("checkbox","noCheck");
 		}else {
 			if(!result.hasErrors()) {
 				//エラーがなかったら
@@ -139,21 +141,34 @@ public class SearchController {
 				mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
 			}
 		}
+		mav.addObject("checkbox", "noCheck");
 		return mav;
 	}
 	
-	//編集入力、削除確認から検索結果に戻るときの検索メソッド
+	//編集入力、更新結果、削除確認、削除結果から検索結果に戻るときの再検索メソッド
 	@RequestMapping(value="/resultback",method=RequestMethod.POST)
 	public ModelAndView resultback(@RequestParam(value="loginId2")String loginId,
 								   @RequestParam(value="userName2")String userName,
 								   @RequestParam(value="icon2")String icon,
 								   @RequestParam(value="profile2")String profile,
+								   @RequestParam(value="userId",required=false)Long[] userId,
+								   @RequestParam(value="back",required=false)String back,
 								   ModelAndView mav) {
 		//検索条件の保持
 		mav.addObject("loginId", loginId);
 		mav.addObject("userName", userName);
 		mav.addObject("icon", icon);
 		mav.addObject("profile", profile);
+		if(back != null) {
+			mav.addObject("checkbox", "noCheck");
+		}else {
+			ArrayList<Long> checkboxList = new ArrayList<Long>();
+			for(Long checknum: userId) {
+				checkboxList.add(checknum);
+			}
+			mav.addObject("checkbox", checkboxList);
+		}
+			
 		//アイコン1種類の時用リスト
 		List<UserData> list = null;
 		//アイコンが2種類選択された時用の追加リスト

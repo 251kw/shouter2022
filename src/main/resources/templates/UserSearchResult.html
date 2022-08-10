@@ -30,7 +30,9 @@
 				<th></th>
 			</tr>
 			<tr th:each="obj : ${datalist}" th:switch="${obj.icon}">
-				<td><input type="checkbox" name="checkbox" th:value="${obj.userId}"></td>
+				<td th:each="checkbox : ${checkbox}" th:switch="${checkbox}">
+				<input  th:case="${obj.userId}"type="checkbox" name="checkbox" th:value="${obj.userId}" checked>
+				<input th:case="noCheck" type="checkbox" name="checkbox" th:value="${obj.userId}"></td>
 				<td th:text=${obj.loginId}></td>		
 				<td th:text=${obj.userName}></td>
 				<td th:case="icon-male"><span class="bi bi-gender-male"></span></td>
