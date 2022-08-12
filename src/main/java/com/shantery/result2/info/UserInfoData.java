@@ -2,6 +2,7 @@ package com.shantery.result2.info;
 
 import javax.persistence.Column;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import static com.shantery.common.constants.*;
 
 
 /**
@@ -17,14 +19,14 @@ import javax.validation.constraints.NotNull;
  *
  */
 @Entity
-@Table(name = "users")
+@Table(name = TABLE_USERS)
 public class UserInfoData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="userid")
+	@Column(name=COLUMN_USERID)
 	private Long userId;
 	
-	@Column(name="loginid", nullable = false, unique = true)
+	@Column(name=COLUMN_LOGINID, nullable = false, unique = true)
 	@NotEmpty	
 	private String loginId;
 
@@ -32,7 +34,7 @@ public class UserInfoData {
 	@NotEmpty
 	private String password;
 	
-	@Column(name="username", nullable = true)
+	@Column(name=COLUMN_USERNAME, nullable = true)
 	@NotEmpty
 	private String userName;
 
