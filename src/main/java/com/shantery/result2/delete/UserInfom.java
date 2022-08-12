@@ -1,10 +1,10 @@
 package com.shantery.result2.delete;
+
 /**
  * @author k.iwai
  *
  */
 import javax.persistence.Column;
-
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,22 +14,23 @@ import javax.persistence.Table;
 
 import com.shantery.result2.search.NotAllBlank;
 import static com.shantery.common.constants.*;
+
 @Entity
-@NotAllBlank(fields = {FIELD_LOGINID,FIELD_USERNAME,FIELD_ICON,FIELD_PROFILE})
+@NotAllBlank(fields = { FIELD_LOGINID, FIELD_USERNAME, FIELD_ICON, FIELD_PROFILE })
 @Table(name = TABLE_USERS)
 
 public class UserInfom {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name=COLUMN_USERID)
-	//@NotNull
+	@Column(name = COLUMN_USERID)
+	// @NotNull
 	private Long userId;
 
-	@Column(name="loginid",nullable = true)	
+	@Column(name = "loginid", nullable = true)
 	private String loginId;
 
-	@Column(name="username",nullable = true)
+	@Column(name = "username", nullable = true)
 	private String userName;
 
 	@Column(nullable = true)
@@ -37,15 +38,16 @@ public class UserInfom {
 
 	@Column(nullable = true)
 	private String profile;
-	
+
 	public UserInfom() {
-		
+
 	}
+
 	// 削除に使用
 	public UserInfom(Long userId) {
 		this.userId = userId;
 	}
-	
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -53,35 +55,35 @@ public class UserInfom {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	
+
 	public String getLoginId() {
 		return loginId;
 	}
-	
+
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;
 	}
-	
+
 	public String getUserName() {
 		return userName;
 	}
-	
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public String getIcon() {
 		return icon;
 	}
-	
+
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-	
+
 	public String getProfile() {
 		return profile;
 	}
-	
+
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
