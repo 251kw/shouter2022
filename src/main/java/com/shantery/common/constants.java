@@ -62,6 +62,9 @@ public class constants {
 	public static final String DISPLAY_OF_UPDATE_INPUT = "UserUpdateInput";
 	public static final String DISPLAY_OF_UPDATE_CONFIRM = "UserUpdateConfirm";
 	public static final String DISPLAY_OF_UPDATE_RESULT = "UserUpdateResult";
+	public static final String DISPLAY_OF_DELETE_CONFIRM = "UserDeleteConfirm";
+	public static final String DISPLAY_OF_DELETE_RESULT = "UserDeleteResult";
+	
 	
 	//addObject,値保管時の第一引数名
 	public static final String ADDNAME_USERID = "userId";
