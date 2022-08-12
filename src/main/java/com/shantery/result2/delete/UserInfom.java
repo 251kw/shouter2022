@@ -1,6 +1,11 @@
 package com.shantery.result2.delete;
-
+/**
+ * @author k.iwai
+ *
+ */
 import javax.persistence.Column;
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,21 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.shantery.result2.search.NotAllBlank;
-
-/**
- * @author k.iwai
- *
- */
-
+import static com.shantery.common.constants.*;
 @Entity
-@NotAllBlank(fields = { "loginId","userName","icon","profile" })
-@Table(name = "users")
+@NotAllBlank(fields = {FIELD_LOGINID,FIELD_USERNAME,FIELD_ICON,FIELD_PROFILE})
+@Table(name = TABLE_USERS)
 
 public class UserInfom {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="userid")
+	@Column(name=COLUMN_USERID)
 	//@NotNull
 	private Long userId;
 

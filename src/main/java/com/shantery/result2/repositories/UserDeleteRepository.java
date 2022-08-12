@@ -1,4 +1,8 @@
 package com.shantery.result2.repositories;
+/**
+ * @author k.iwai
+ *
+ */
 
 import java.util.List;
 

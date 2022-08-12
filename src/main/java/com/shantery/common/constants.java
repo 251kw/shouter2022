@@ -9,6 +9,8 @@ public class constants {
 	public static final String ICON = "icon";
 	public static final String PROFILE = "profile";
 	public static final String WRITING = "writing";
+	public static final String CHECKBOX = "checkbox";
+	
 	
 	//iconのvalue属性
 	public static final String ICONMALE = "icon-male";
