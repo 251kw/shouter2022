@@ -61,10 +61,10 @@ public class DeleteController {
 	public ModelAndView deleteResult(
 			//　値を取得
 			@RequestParam(name=USERID,required=false)Long[] userId,
-			@RequestParam(value=LOGINID)String loginId,
-			@RequestParam(value=USERNAME)String userName,
-			@RequestParam(value=ICON)String icon,
-			@RequestParam(value=PROFILE)String profile,
+			@RequestParam(value=LOGINID2)String loginId,
+			@RequestParam(value=USERNAME2)String userName,
+			@RequestParam(value=ICON2)String icon,
+			@RequestParam(value=PROFILE2)String profile,
 			ModelAndView mav) {
 		
 		// UserInfo型リストを作成
