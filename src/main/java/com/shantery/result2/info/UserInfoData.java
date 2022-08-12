@@ -2,7 +2,6 @@ package com.shantery.result2.info;
 
 import javax.persistence.Column;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +12,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import static com.shantery.common.constants.*;
 
-
 /**
  * @author y.nakaya
  *
@@ -23,26 +21,26 @@ import static com.shantery.common.constants.*;
 public class UserInfoData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name=COLUMN_USERID)
+	@Column(name = COLUMN_USERID)
 	private Long userId;
-	
-	@Column(name=COLUMN_LOGINID, nullable = false, unique = true)
-	@NotEmpty	
+
+	@Column(name = COLUMN_LOGINID, nullable = false, unique = true)
+	@NotEmpty
 	private String loginId;
 
-	@Column(name="password", nullable = true)
+	@Column(name = "password", nullable = true)
 	@NotEmpty
 	private String password;
-	
-	@Column(name=COLUMN_USERNAME, nullable = true)
+
+	@Column(name = COLUMN_USERNAME, nullable = true)
 	@NotEmpty
 	private String userName;
 
-	@Column(name="icon", nullable = true)
+	@Column(name = "icon", nullable = true)
 	@NotNull
 	private String icon;
 
-	@Column(name="profile", nullable = true)
+	@Column(name = "profile", nullable = true)
 	@NotEmpty
 	private String profile;
 

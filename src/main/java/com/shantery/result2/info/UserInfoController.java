@@ -36,13 +36,13 @@ public class UserInfoController {
 			@RequestParam(value = ICON, required = false) String icon,
 			@RequestParam(value = PROFILE, required = false) String profile,
 			@RequestParam(value = DISPLAY_BACK, required = false) String back, ModelAndView mav) {
-		
-		//登録入力画面で戻るボタン押されたら
+
+		// 登録入力画面で戻るボタン押されたら
 		if (back != null) {
-			//ログイン画面に遷移
+			// ログイン画面に遷移
 			mav.setViewName(DISPLAY_OF_INDEX);
 		} else {
-			//登録入力条件保持
+			// 登録入力条件保持
 			mav.addObject(ADDNAME_LOGINID, loginId);
 			mav.addObject(ADDNAME_PASSWORD, password);
 			mav.addObject(ADDNAME_USERNAME, userName);
@@ -62,10 +62,10 @@ public class UserInfoController {
 			@RequestParam(value = ICON, required = false) String icon,
 			@RequestParam(value = PROFILE, required = false) String profile,
 			@RequestParam(value = DISPLAY_BACKS, required = false) String backs, ModelAndView mav) {
-		
-		//戻るボタンが押されたら登録入力画面に戻る
+
+		// 戻るボタンが押されたら登録入力画面に戻る
 		if (backs != null) {
-			//登録入力条件保持
+			// 登録入力条件保持
 			mav.addObject(ADDNAME_LOGINID, loginId);
 			mav.addObject(ADDNAME_PASSWORD, password);
 			mav.addObject(ADDNAME_USERNAME, userName);
@@ -77,7 +77,7 @@ public class UserInfoController {
 		boolean INFO_CHECK = false;
 		// 入力チェックに引っかかった場合、新規登録画面に戻る
 		if (result.hasErrors()) {
-			//登録入力条件保持
+			// 登録入力条件保持
 			mav.addObject(ADDNAME_ERROR, result.hasErrors());
 			mav.addObject(ADDNAME_LOGINID, loginId);
 			mav.addObject(ADDNAME_PASSWORD, password);
