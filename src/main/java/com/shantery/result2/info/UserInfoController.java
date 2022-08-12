@@ -89,7 +89,7 @@ public class UserInfoController {
 			// ユーザー情報重複なしだったら、結果表示。重複ありだったらエラー表示
 			if (user != null) {
 				INFO_CHECK = true;
-				mav.addObject("error2", INFO_CHECK);
+				mav.addObject(DUPLICATION_ERROR, INFO_CHECK);
 				mav.addObject(ADDNAME_LOGINID, loginId);
 				mav.addObject(ADDNAME_PASSWORD, password);
 				mav.addObject(ADDNAME_USERNAME, userName);

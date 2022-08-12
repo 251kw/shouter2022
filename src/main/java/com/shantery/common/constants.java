@@ -94,6 +94,9 @@ public class constants {
 	//新規登録用判断フラグ
 	public static final String INFO_CHECK = "info";
 	
+	//新規登録のLoginId重複エラー用
+	public static final String DUPLICATION_ERROR = "error2";
+	
 	//検索条件保持
 	public static final String LOGINID2 = "loginId2";
 	public static final String USERNAME2 = "userName2";
