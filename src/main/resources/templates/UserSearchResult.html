@@ -29,35 +29,20 @@
 				<th th:text="#{table.profile}" class="bi bi-card-text"></th>
 				<th></th>
 			</tr>
-			<tr th:each="obj : ${datalist}" th:switch="${obj.icon}">
-			<!-- 外側ループ -->
-			<th:block th:if="${check}">
-			<!-- チェックボックスを保持した場合 -->
-			<th:block th:each="checkbox,checkStatus : ${checkbox}">
-			<!-- 削除確認から検索結果へ戻った時のチェックボックスの番号 -->
-				<th:block th:if="${checkbox == obj.userId}">
-				<!-- チェックボックスの番号とuserIdが一緒だったら　-->
-					<!-- 削除確認から検索結果に戻る時のチェックボックスの保持　チェックされた削除項目のuserIdと検索結果のuserIdが一致していたらチェックされる -->
+			<tr th:each="obj : ${datalist}" >
+				<!-- チェックボックスの保持 -->
+				<th:block th:if="${obj.checkBox == 'check'}">
 					<td><input type="checkbox" name="checkbox" th:value="${obj.userId}" checked></td>
 				</th:block>
-				<th:block th:unless="${checkbox == obj.userId}">
-				<!-- 一緒じゃなかったら -->
-					<th:block th:if="${checkStatus.last}">
-						<!-- チェックボックスのループが最後まで到達 -->
-						<td><input  type="checkbox" name="checkbox" th:value="${obj.userId}"></td>
-					</th:block>
-					<th:block th:unless="${checkStatus.last}"><!-- 重複除け　--></th:block>
+				<th:block th:unless="${obj.checkBox == 'check'}">
+					<td><input  type="checkbox" name="checkbox" th:value="${obj.userId}"></td>
 				</th:block>
-			</th:block>	
-			</th:block>
-			<th:block th:unless="${check}">
-			<!-- チェックボックスを保持しない場合 -->
-				<td><input  type="checkbox" name="checkbox" th:value="${obj.userId}"></td>
-			</th:block>
 				<td th:text=${obj.loginId}></td>		
 				<td th:text=${obj.userName}></td>
-				<td th:case="icon-male"><span class="bi bi-gender-male"></span></td>
-				<td th:case="icon-female"><span class="bi bi-gender-female"></span></td>
+				<th:block th:switch="${obj.icon}">
+					<td th:case="icon-male"><span class="bi bi-gender-male"></span></td>
+					<td th:case="icon-female"><span class="bi bi-gender-female"></span></td>
+				</th:block>
 				<td th:text=${obj.profile}></td>
 				<td><input type="submit" name="edit" th:value="#{btn.edit}" th:formaction="@{'/update/' + ${obj.userId}}" class="btn btn-primary"></td>
 			</tr>

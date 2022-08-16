@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import static com.shantery.common.constants.*;
 /**
@@ -37,20 +38,23 @@ public class UserData {
 	@Column(nullable = true)
 	private String profile;
 	
+	//チェックボックス保持用のフラグフィールド
+	@Transient
+	private String checkbox;
+	
 	public UserData() {
 		
 	}
 	
 	//更新時に使用
-	public UserData(Long userId, String loginId, String userName, String icon, String profile) {
+	public UserData(Long userId, String loginId, String userName, String icon, String profile, String checkbox) {
 		this.userId = userId;
 		this.loginId = loginId;
 		this.userName = userName;
 		this.icon = icon;
 		this.profile = profile;
+		this.checkbox = checkbox;
 	}
-	
-	
 	
 	public Long getUserId() {
 		return userId;
@@ -90,5 +94,13 @@ public class UserData {
 	
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+	
+	public String getCheckBox() {
+		return checkbox;
+	}
+	
+	public void setCheckBox(String checkbox) {
+		this.checkbox = checkbox;
 	}
 }

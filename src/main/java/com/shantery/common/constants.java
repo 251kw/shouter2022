@@ -127,5 +127,5 @@ public class constants {
 	public static final String UPDATE_PROFILE = "Profile";
 	
 	//チェックボックス用判断フラグ
-	public static final String CHECKBOX_NOCHECK = "noCheck";
+	public static final String CHECKBOX_CHECK = "check";
 }

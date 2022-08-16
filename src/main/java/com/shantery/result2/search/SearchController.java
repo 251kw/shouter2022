@@ -1,6 +1,5 @@
 package com.shantery.result2.search;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -64,7 +63,6 @@ public class SearchController {
 			mav.addObject(ADDNAME_USERNAME, userName);
 			mav.addObject(ADDNAME_ICON, icons[0]);
 			mav.addObject(ADDNAME_PROFILE, profile);
-			mav.addObject(ADDNAME_CHECKBOX,CHECKBOX_NOCHECK);
 		}else {
 			if(!result.hasErrors()) {
 				//エラーがなかったら
@@ -136,7 +134,6 @@ public class SearchController {
 				mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
 			}
 		}
-		mav.addObject("check", false);
 		return mav;
 	}
 	
@@ -154,18 +151,6 @@ public class SearchController {
 		mav.addObject(ADDNAME_USERNAME, userName);
 		mav.addObject(ADDNAME_ICON, icon);
 		mav.addObject(ADDNAME_PROFILE, profile);
-		if(back != null) {
-			//編集機能ではチェックボックスは関係ないので
-			mav.addObject("check", false);
-		}else {
-			//削除項目のチェックボックスの保持
-			ArrayList<Long> checkboxList = new ArrayList<Long>();
-			for(Long checkboxNum: userId) {
-				checkboxList.add(checkboxNum);
-			}
-			mav.addObject("check", true);
-			mav.addObject(ADDNAME_CHECKBOX, checkboxList);
-		}
 		//検索結果用フラグ
 		boolean searchresult = false;	
 		//アイコン1種類の時用リスト
@@ -174,6 +159,7 @@ public class SearchController {
 		List<UserData> list2 = null;
 		//listとlist2を結合させたリスト
 		List<UserData> lists = null;
+		
 		if(icon.equals(ICON_NOCHECK)) {
 			//チェックなしの場合は空文字にする
 			icon = "";
@@ -186,7 +172,7 @@ public class SearchController {
 			//icon-femaleの場合の検索結果
 			list2 = service.getAll(loginId, userName, icon, profile);
 			//2種類のアイコンで検索した結果を結合したリスト
-			lists = Stream.concat(list.stream(), list2.stream()).collect(Collectors.toList());
+			lists = Stream.concat(list.stream(), list2.stream()).collect(Collectors.toList());	
 		}else {
 			//icon-male.icon-femaleのどちらか
 			lists = service.getAll(loginId, userName, icon, profile);
@@ -201,6 +187,20 @@ public class SearchController {
 			//検索結果0件場合は、フラグをtrueにする
 			searchresult = true;
 			mav.addObject(ADDNAME_RESULT, searchresult);
+		}
+		if(back != null) {
+			//編集機能ではチェックボックスは関係ないので処理なし
+		}else {
+			//削除項目のチェックボックスの保持
+			String checkbox = CHECKBOX_CHECK;
+			for(int i=0; i<lists.size(); i++) {
+				//チェックボックスにチェックがついたuserIdと検索結果のuserIdが一致していたらエンティティクラスにある非永続化したフラグを"check"にする
+				for(Long checkboxNum: userId) {
+					if(lists.get(i).getUserId().equals(checkboxNum)) {
+						lists.get(i).setCheckBox(checkbox);
+					}
+				}
+			}
 		}
 		mav.addObject(ADDNAME_DATALIST, lists);
 		mav.setViewName(DISPLAY_OF_SEARCH_RESULT);
