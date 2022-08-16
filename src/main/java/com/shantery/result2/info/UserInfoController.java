@@ -29,7 +29,7 @@ public class UserInfoController {
 	UserInfoService infoService;
 
 	// 新規登録入力画面遷移
-	@RequestMapping(value = "/UserInfoInput", method = RequestMethod.POST)
+	@RequestMapping(value = URL_INFO_INPUT, method = RequestMethod.POST)
 	public ModelAndView UserInfoInput(@RequestParam(value = LOGINID, required = false) String loginId,
 			@RequestParam(value = PASSWORD, required = false) String password,
 			@RequestParam(value = USERNAME, required = false) String userName,
@@ -54,7 +54,7 @@ public class UserInfoController {
 	}
 
 	// 新規登録確認画面へ遷移
-	@RequestMapping(value = "/UserInfoConfirm", method = RequestMethod.POST)
+	@RequestMapping(value = URL_INFO_CONFIRM, method = RequestMethod.POST)
 	public ModelAndView UserInfoConfirm(@Validated @ModelAttribute UserInfoData userinfodata, BindingResult result,
 			@RequestParam(value = LOGINID, required = false) String loginId,
 			@RequestParam(value = PASSWORD, required = false) String password,
@@ -111,7 +111,7 @@ public class UserInfoController {
 	}
 
 	// 新規登録結果画面へ遷移
-	@RequestMapping(value = "/InfoResult", method = RequestMethod.POST)
+	@RequestMapping(value = URL_INFO_RESULT, method = RequestMethod.POST)
 	public ModelAndView UserInfoCResult(@ModelAttribute UserInfoData userinfodata,
 			@RequestParam(value = LOGINID, required = false) String loginId,
 			@RequestParam(value = PASSWORD, required = false) String password,
