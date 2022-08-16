@@ -11,12 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import com.shantery.result2.search.NotAllBlank;
 import static com.shantery.common.constants.*;
 
 @Entity
-@NotAllBlank(fields = { FIELD_LOGINID, FIELD_USERNAME, FIELD_ICON, FIELD_PROFILE })
 @Table(name = TABLE_USERS)
 
 public class UserInfom {
@@ -24,7 +23,7 @@ public class UserInfom {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = COLUMN_USERID)
-	// @NotNull
+	@NotNull
 	private Long userId;
 
 	@Column(name = "loginid", nullable = true)

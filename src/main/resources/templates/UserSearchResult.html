@@ -18,6 +18,7 @@
 <div class="container-fluid">
 	<!-- 検索結果がある場合　-->
 	<form method="post" action="/search" th:unless="${result}">
+	<p th:if="${error}" th:text=#{error.delete.choose} class="error"></p>
 		<input type="button" onClick="checkAllBox(true)" th:value="#{btn.choose.all}" class="btn btn-primary">
 		<input type="button" onClick="checkAllBox(false)" th:value="#{btn.not.choose}" class="btn btn-primary">
 		<table border="1" class="table">
