@@ -24,7 +24,7 @@ public class UserUpdateController {
 	UserUpdateRepository repository;
 	
 	//編集画面へ遷移
-	@RequestMapping(value="/index/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/update/{id}", method=RequestMethod.POST)
 	public ModelAndView edit(@PathVariable Long id,
 							 //編集ボタンから送られた情報の取得
 							 @RequestParam(name=LOGINID) String loginId,

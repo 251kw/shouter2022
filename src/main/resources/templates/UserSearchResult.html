@@ -18,7 +18,6 @@
 <div class="container-fluid">
 	<!-- 検索結果がある場合　-->
 	<form method="post" action="/search" th:unless="${result}">
-	<p th:if="${error}" th:text=#{error.delete.choose} class="error"></p>
 		<input type="button" onClick="checkAllBox(true)" th:value="#{btn.choose.all}" class="btn btn-primary">
 		<input type="button" onClick="checkAllBox(false)" th:value="#{btn.not.choose}" class="btn btn-primary">
 		<table border="1" class="table">
@@ -65,6 +64,7 @@
 		</table>
 		<input type="button" onClick="checkAllBox(true)" th:value="#{btn.choose.all}" class="btn btn-primary">
 		<input type="button" onClick="checkAllBox(false)" th:value="#{btn.not.choose}" class="btn btn-primary">
+		<p th:if="${error}" th:text=#{error.delete.choose} class="error"></p>
 		<div class="text-center">
 			<input type="submit" th:value="#{btn.delete}"  th:formaction="@{/deleteConfirm}"class="btn btn-primary btn-lg">
 			<input type="submit" name="back" th:value="#{btn.back}" th:formaction="@{/search}" class="btn btn-primary btn-lg">
@@ -76,7 +76,7 @@
 		<p><input type="hidden" name="profile" th:value="${profile}"></p>
 	</form>
 	<!-- 検索結果が0件だった場合-->
-	<form method="post" action="/" th:if="${result}">
+	<form method="post" action="/search" th:if="${result}">
 		<p th:text=#{error.search.result} class="error"></p>
 		<input type="submit" name="back" th:value="#{btn.back}" class="btn btn-primary btn-lg">
 		<!-- 検索条件の保持 -->

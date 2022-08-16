@@ -32,22 +32,16 @@ public class SearchController {
 	private SearchService service;
 	
 	//index.htmlから送信されてくるのでpost
-	@RequestMapping(value="/search",method=RequestMethod.POST)
+	@RequestMapping(value="/searchinput",method=RequestMethod.POST)
 	public ModelAndView searchInput(ModelAndView mav) {
 		mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
 		//最初の状態はどちらにもチェックなし
 		mav.addObject(ADDNAME_ICON, ICON_NOCHECK);
 		return mav;
 	}
-
-	//検索内容入力画面からindex.html画面に戻るときのメソッド
-	@RequestMapping(value="/index", method=RequestMethod.POST)
-	public String indexback() {
-		return DISPLAY_OF_INDEX;
-	}
 	
 	//検索条件の保持、バリデーションチェック、検索メソッド呼び出し
-	@RequestMapping(value="/",method=RequestMethod.POST)
+	@RequestMapping(value="/search",method=RequestMethod.POST)
 	public ModelAndView search(@RequestParam(value=LOGINID,required=false)String loginId,
 			@RequestParam(value=USERNAME,required=false)String userName,
 			@RequestParam(value=ICON,required=false)String[] icons,
@@ -172,7 +166,8 @@ public class SearchController {
 			mav.addObject("check", true);
 			mav.addObject(ADDNAME_CHECKBOX, checkboxList);
 		}
-			
+		//検索結果用フラグ
+		boolean searchresult = false;	
 		//アイコン1種類の時用リスト
 		List<UserData> list = null;
 		//アイコンが2種類選択された時用の追加リスト
@@ -195,6 +190,17 @@ public class SearchController {
 		}else {
 			//icon-male.icon-femaleのどちらか
 			lists = service.getAll(loginId, userName, icon, profile);
+		}
+		//検索結果のサイズで件数判断
+		if(lists.size() != 0) {
+			//検索結果リストを格納
+			mav.addObject(ADDNAME_DATALIST, lists);
+			//検索結果がある場合、フラグはfalseのまま
+			mav.addObject(ADDNAME_RESULT, searchresult);
+		}else {
+			//検索結果0件場合は、フラグをtrueにする
+			searchresult = true;
+			mav.addObject(ADDNAME_RESULT, searchresult);
 		}
 		mav.addObject(ADDNAME_DATALIST, lists);
 		mav.setViewName(DISPLAY_OF_SEARCH_RESULT);
