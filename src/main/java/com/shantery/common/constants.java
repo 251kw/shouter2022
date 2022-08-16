@@ -11,7 +11,6 @@ public class constants {
 	public static final String WRITING = "writing";
 	public static final String CHECKBOX = "checkbox";
 	
-	
 	//iconのvalue属性
 	public static final String ICONMALE = "icon-male";
 	public static final String ICONFEMALE = "icon-female";
@@ -67,6 +66,22 @@ public class constants {
 	public static final String DISPLAY_OF_DELETE_CONFIRM = "UserDeleteConfirm";
 	public static final String DISPLAY_OF_DELETE_RESULT = "UserDeleteResult";
 	
+	//URL
+	public static final String URL_INFO_INPUT = "/UserInfoInput";		//新規登録画面
+	public static final String URL_INFO_CONFIRM = "/UserInfoConfirm";	//新規登録確認画
+	public static final String URL_INFO_RESULT = "/InfoResult";			//新規登録結果
+	public static final String URL_BOARD ="/shouter";					//掲示板
+	public static final String URL_ADD_SHOUT = "/addshout";				//叫ぶ
+	public static final String URL_LOGOUT = "/logout";					//ログアウト
+	public static final String URL_SEARCH_INPUT = "/searchInput";		//検索入力
+	public static final String URL_SEARCH = "/search";					//検索結果
+	public static final String URL_RESULT_BACK = "/resultback";			//再検索
+	public static final String URL_UPDATE = "/update/{id}";				//編集入力
+	public static final String URL_UPDATE_INPUT = "/UserUpdateInput";	//戻るボタンを押したときの編集画面
+	public static final String URL_UPDATE_CONFIRM = "/UserUpdateConfirm"; //更新内容確認
+	public static final String URL_UPDATE_RESULT = "/UserUpdateResult";	//更新結果
+	public static final String URL_DELETE_CONFIRM = "/deleteConfirm";	//削除確認
+	public static final String URL_DELETE_RESULT = "/deleteResult";		//削除結果
 	
 	//addObject,値保管時の第一引数名
 	public static final String ADDNAME_USERID = "userId";
