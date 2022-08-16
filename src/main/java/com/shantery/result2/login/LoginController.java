@@ -44,7 +44,7 @@ public class LoginController {
 	}
 	
 	//ログイン画面で入力されたログインIDとパスワードをもとにユーザー情報を検索
-	@RequestMapping(value="/shouter", method=RequestMethod.POST)
+	@RequestMapping(value=URL_BOARD, method=RequestMethod.POST)
 	public ModelAndView shouter(@RequestParam(value=LOGINID,required=true)String loginId,
 								@RequestParam(value=PASSWORD,required=true)String password,
 								@ModelAttribute(FORM_MODEL)@Validated UserLoginData userdata,
@@ -85,7 +85,7 @@ public class LoginController {
 	}	
 	
 	//データベースに叫ぶボタンでshoutした内容を追加し、表示させる
-	@RequestMapping(value="/addshout",method=RequestMethod.POST)
+	@RequestMapping(value=URL_ADD_SHOUT,method=RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView addshout(@RequestParam(value=LOGINID,required=false)String loginId,
 								 @RequestParam(value=PASSWORD,required=false)String password,
@@ -120,7 +120,7 @@ public class LoginController {
 	}
 	
 	//logoutボタンからindex.htmlに遷移
-	@RequestMapping(value="/logout",method=RequestMethod.POST)
+	@RequestMapping(value=URL_LOGOUT,method=RequestMethod.POST)
 	public String logout() {
 		return DISPLAY_OF_INDEX;
 	}
