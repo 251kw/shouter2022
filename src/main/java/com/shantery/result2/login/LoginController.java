@@ -33,8 +33,13 @@ public class LoginController {
 	private LoginService service;
 	
 	//index.htmlへ接続
-	@RequestMapping(value="/index", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index() {
+		return DISPLAY_OF_INDEX;
+	}
+	
+	@RequestMapping(value="/", method=RequestMethod.POST)
+	public String indexback() {
 		return DISPLAY_OF_INDEX;
 	}
 	
