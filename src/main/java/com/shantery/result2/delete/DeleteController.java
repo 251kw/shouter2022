@@ -29,20 +29,21 @@ import static com.shantery.common.constants.*;
 public class DeleteController {
 	@Autowired
 	UserDeleteRepository udRepository;
-	
+
 	@Autowired
 	SearchRepository repository;
-	
+
 	@Autowired
 	private SearchService service;
 
 	// 削除確認画面へ移動
-	@RequestMapping(value = "/deleteConfirm", method = RequestMethod.POST)
+	@RequestMapping(value = URL_DELETE_CONFIRM, method = RequestMethod.POST)
 	public ModelAndView deleteConfirm(
 			// それぞれの値を取得
 			@RequestParam(name = CHECKBOX, required = false) Long[] userId,
 			@RequestParam(value = LOGINID) String loginId, @RequestParam(value = USERNAME) String userName,
-			@RequestParam(value = ICON) String icon, @RequestParam(value = PROFILE) String profile, @RequestParam(value=DISPLAY_BACK,required=false)String back,
+			@RequestParam(value = ICON) String icon, @RequestParam(value = PROFILE) String profile,
+			@RequestParam(value = DISPLAY_BACK, required = false) String back,
 			@Validated @ModelAttribute UserInfom userinfom, BindingResult result, ModelAndView mav) {
 		// チェックボックスにチェックが入っていたら
 		if (userId != null) {
@@ -76,28 +77,28 @@ public class DeleteController {
 				mav.addObject(ADDNAME_USERNAME, userName);
 				mav.addObject(ADDNAME_ICON, icon);
 				mav.addObject(ADDNAME_PROFILE, profile);
-					
-				//アイコン1種類の時用リスト
+
+				// アイコン1種類の時用リスト
 				List<UserData> list = null;
-				//アイコンが2種類選択された時用の追加リスト
+				// アイコンが2種類選択された時用の追加リスト
 				List<UserData> list2 = null;
-				//listとlist2を結合させたリスト
+				// listとlist2を結合させたリスト
 				List<UserData> lists = null;
-				if(icon.equals(ICON_NOCHECK)) {
-					//チェックなしの場合は空文字にする
+				if (icon.equals(ICON_NOCHECK)) {
+					// チェックなしの場合は空文字にする
 					icon = "";
 					lists = service.getAll(loginId, userName, icon, profile);
-				}else if(icon.equals(ICON_CHECKS)) {
+				} else if (icon.equals(ICON_CHECKS)) {
 					icon = ICON_MALE;
-					//icon-maleの場合の検索結果
+					// icon-maleの場合の検索結果
 					list = service.getAll(loginId, userName, icon, profile);
 					icon = ICON_FEMALE;
-					//icon-femaleの場合の検索結果
+					// icon-femaleの場合の検索結果
 					list2 = service.getAll(loginId, userName, icon, profile);
-					//2種類のアイコンで検索した結果を結合したリスト
+					// 2種類のアイコンで検索した結果を結合したリスト
 					lists = Stream.concat(list.stream(), list2.stream()).collect(Collectors.toList());
-				}else {
-					//icon-male.icon-femaleのどちらか
+				} else {
+					// icon-male.icon-femaleのどちらか
 					lists = service.getAll(loginId, userName, icon, profile);
 				}
 				mav.addObject(ADDNAME_DATALIST, lists);
@@ -108,7 +109,7 @@ public class DeleteController {
 	}
 
 	// 削除結果画面へ移動
-	@RequestMapping(value = "/deleteResult", method = RequestMethod.POST)
+	@RequestMapping(value = URL_DELETE_RESULT, method = RequestMethod.POST)
 	public ModelAndView deleteResult(
 			// 値を取得
 			@RequestParam(name = USERID, required = false) Long[] userId,
