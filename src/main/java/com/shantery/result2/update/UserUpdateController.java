@@ -24,7 +24,7 @@ public class UserUpdateController {
 	UserUpdateRepository repository;
 	
 	//編集画面へ遷移
-	@RequestMapping(value="/update/{id}", method=RequestMethod.POST)
+	@RequestMapping(value=URL_UPDATE, method=RequestMethod.POST)
 	public ModelAndView edit(@PathVariable Long id,
 							 //編集ボタンから送られた情報の取得
 							 @RequestParam(name=LOGINID) String loginId,
@@ -60,7 +60,7 @@ public class UserUpdateController {
 	}
 	
 	//更新確認画面へ遷移
-	@RequestMapping(value="/UserUpdateConfirm", method=RequestMethod.POST)
+	@RequestMapping(value=URL_UPDATE_CONFIRM, method=RequestMethod.POST)
 	public ModelAndView editCheck(//編集内容の保持	
 								  //フィールド名と同じ名前が優先される為、使いたい方をフィールド名と同じ名前にする
 								  @RequestParam(name=LOGINID) String loginId,	//変更後のログインID
@@ -121,7 +121,7 @@ public class UserUpdateController {
 	}
 	
 	//更新確認画面で戻るボタンが押された場合、編集確認画面に遷移
-	@RequestMapping(value="/UserUpdateInput", method=RequestMethod.POST)
+	@RequestMapping(value=URL_UPDATE_INPUT, method=RequestMethod.POST)
 	public ModelAndView editBack(//確認画面から送られてくる検索条件
 								 @RequestParam(name=LOGINID) String loginId,
 								 @RequestParam(name=USERNAME) String userName,
@@ -157,7 +157,7 @@ public class UserUpdateController {
 	}
 	
 	//更新結果画面へ遷移
-	@RequestMapping(value="/UserUpdateResult", method=RequestMethod.POST)
+	@RequestMapping(value=URL_UPDATE_RESULT, method=RequestMethod.POST)
 	public ModelAndView updateResult(/*検索条件の保持
 									  *検索させるときに同じDBのフィールド名にするためパラメーター名を変更
 									  */
