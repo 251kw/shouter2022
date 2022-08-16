@@ -32,7 +32,7 @@ public class SearchController {
 	private SearchService service;
 	
 	//index.htmlから送信されてくるのでpost
-	@RequestMapping(value="/searchinput",method=RequestMethod.POST)
+	@RequestMapping(value=URL_SEARCH_INPUT,method=RequestMethod.POST)
 	public ModelAndView searchInput(ModelAndView mav) {
 		mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
 		//最初の状態はどちらにもチェックなし
@@ -41,7 +41,7 @@ public class SearchController {
 	}
 	
 	//検索条件の保持、バリデーションチェック、検索メソッド呼び出し
-	@RequestMapping(value="/search",method=RequestMethod.POST)
+	@RequestMapping(value=URL_SEARCH,method=RequestMethod.POST)
 	public ModelAndView search(@RequestParam(value=LOGINID,required=false)String loginId,
 			@RequestParam(value=USERNAME,required=false)String userName,
 			@RequestParam(value=ICON,required=false)String[] icons,
@@ -141,7 +141,7 @@ public class SearchController {
 	}
 	
 	//編集入力、更新結果、削除確認、削除結果から検索結果に戻るときの再検索メソッド
-	@RequestMapping(value="/resultback",method=RequestMethod.POST)
+	@RequestMapping(value=URL_RESULT_BACK,method=RequestMethod.POST)
 	public ModelAndView resultback(@RequestParam(value=LOGINID2)String loginId,
 								   @RequestParam(value=USERNAME2)String userName,
 								   @RequestParam(value=ICON2)String icon,
