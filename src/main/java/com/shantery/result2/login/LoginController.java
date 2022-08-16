@@ -95,7 +95,7 @@ public class LoginController {
 			//叫ぶ内容を入力していたらエラーなし
 			//叫んだ時の時刻を取得し、ShoutDataエンティティにセット
 			Calendar calender =Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String date = sdf.format(calender.getTime());
 			shoutdata.setDate(date);
 			//叫んだ内容をデータベースに追加
