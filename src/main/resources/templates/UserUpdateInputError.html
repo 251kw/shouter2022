@@ -1,0 +1,33 @@
+<!-- h.kasai
+	 編集画面 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title th:text="#{title.update.input}"></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="http://localhost:8080/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="http://localhost:8080/css/shouter.css" >
+</head>
+<body>
+<div class="background">
+	<div class="text-center">
+		<strong th:text="#{title.update.input}" class="text-white"></strong>
+	</div>
+</div>
+<div class="container-fluid">
+	<form method="post" action="/resultback">
+	<p th:text="#{error.update.edit}" class="error"></p>
+		<div class="text-center">
+			<input type="submit" th:value="#{btn.back}"  name="back" class="btn btn-primary btn-lg">
+				<!-- 検索条件の保持　-->
+				<p><input type="hidden" name="loginId2" th:value="${loginId}"></p>
+				<p><input type="hidden" name="userName2" th:value="${userName}"></p>
+				<p><input type="hidden" name="icon2" th:value="${icon}"></p>
+				<p><input type="hidden" name="profile2" th:value="${profile}"></p>
+		</div>
+	</form>	
+</div>
+</body>
+</html>

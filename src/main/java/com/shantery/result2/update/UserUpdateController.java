@@ -33,13 +33,9 @@ public class UserUpdateController {
 							 @RequestParam(name=PROFILE) String profile,
 							 @ModelAttribute UserInfo userInfo,
 							 ModelAndView mav) {
-		UserInfo user = repository.findById(id).get();
-		Long userId = user.getUserId();
-		String LoginId = user.getLoginId();
-		String loginID = user.getLoginId();
-		String UserName = user.getUserName();
-		String Icon = user.getIcon();
-		String Profile = user.getProfile();
+		
+		//userId検索フラグ
+		boolean UserId = repository.existsById(id);
 		
 		//検索条件の保持
 		mav.addObject(ADDNAME_LOGINID, loginId);
@@ -47,15 +43,27 @@ public class UserUpdateController {
 		mav.addObject(ADDNAME_ICON, icon);
 		mav.addObject(ADDNAME_PROFILE, profile);
 		
-		//編集ボタンから渡されたデータ
-		mav.addObject(ADDNAME_UPDATE_USERID, userId);
-		mav.addObject(ADDNAME_UPDATE_AFTER_LOGINID, LoginId);
-		mav.addObject(ADDNAME_UPDATE_BEFORE_LOGINID, loginID);
-		mav.addObject(ADDNAME_UPDATE_USERNAME, UserName);
-		mav.addObject(ADDNAME_UPDATE_ICON, Icon);
-		mav.addObject(ADDNAME_UPDATE_PROFILE, Profile);	
-		mav.addObject(USER_INFO, userInfo);
-		mav.setViewName(DISPLAY_OF_UPDATE_INPUT);
+		if(UserId) {
+			UserInfo user = repository.findById(id).get();
+			Long userId = user.getUserId();
+			String LoginId = user.getLoginId();
+			String loginID = user.getLoginId();
+			String UserName = user.getUserName();
+			String Icon = user.getIcon();
+			String Profile = user.getProfile();
+		
+			//編集ボタンから渡されたデータ
+			mav.addObject(ADDNAME_UPDATE_USERID, userId);
+			mav.addObject(ADDNAME_UPDATE_AFTER_LOGINID, LoginId);
+			mav.addObject(ADDNAME_UPDATE_BEFORE_LOGINID, loginID);
+			mav.addObject(ADDNAME_UPDATE_USERNAME, UserName);
+			mav.addObject(ADDNAME_UPDATE_ICON, Icon);
+			mav.addObject(ADDNAME_UPDATE_PROFILE, Profile);	
+			mav.addObject(USER_INFO, userInfo);
+			mav.setViewName(DISPLAY_OF_UPDATE_INPUT);
+		}else {
+			mav.setViewName(DISPLAY_OF_UPDATE_ERROR);
+		}
 		return mav;
 	}
 	
@@ -78,6 +86,7 @@ public class UserUpdateController {
 								  @RequestParam(name=PROFILE2) String profile2,
 								  ModelAndView mav) {
 		
+		//重複ログインID検索フラグ
 		boolean check = false;
 		
 		//変更後のログインID検索
@@ -160,7 +169,6 @@ public class UserUpdateController {
 	}
 	
 	//更新結果画面へ遷移
-	@SuppressWarnings("unused")
 	@RequestMapping(value=URL_UPDATE_RESULT, method=RequestMethod.POST)
 	public ModelAndView updateResult(/*検索条件の保持
 									  *検索させるときに同じDBのフィールド名にするためパラメーター名を変更
@@ -177,9 +185,10 @@ public class UserUpdateController {
 									 @RequestParam(name=UPDATE_PROFILE) String Profile,
 									 ModelAndView mav) {
 		
+		//更新確認フラグ
 		boolean check = false;
 		
-		//userId
+		//更新されるまでにuserIdがあるか確認
 		boolean UserId = repository.existsById(userId);
 	
 		//更新結果画面表示

@@ -61,6 +61,7 @@ public class constants {
 	public static final String DISPLAY_OF_USERINFO_CONFIRM = "UserInfoConfirm";
 	public static final String DISPLAY_OF_USERINFO_RESULT = "UserInfoResult";
 	public static final String DISPLAY_OF_UPDATE_INPUT = "UserUpdateInput";
+	public static final String DISPLAY_OF_UPDATE_ERROR = "UserUpdateInputError";
 	public static final String DISPLAY_OF_UPDATE_CONFIRM = "UserUpdateConfirm";
 	public static final String DISPLAY_OF_UPDATE_RESULT = "UserUpdateResult";
 	public static final String DISPLAY_OF_DELETE_CONFIRM = "UserDeleteConfirm";
