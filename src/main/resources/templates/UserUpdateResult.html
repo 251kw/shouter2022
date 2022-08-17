@@ -38,6 +38,7 @@
 				<td th:text="${Profile}"></td>
 			</tr>
 		</table>
+		<div th:if="${error}" th:text="#{error.update.result}" class="error"></div>
 		<div class="text-center">
 			<input type="submit" name="back" th:value="#{btn.back}" class="btn btn-primary btn-lg">
 				<!-- 検索条件の保持 -->	

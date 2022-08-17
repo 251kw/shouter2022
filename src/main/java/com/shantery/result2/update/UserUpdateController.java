@@ -137,6 +137,9 @@ public class UserUpdateController {
 								 @ModelAttribute UserInfo userInfo,
 								 ModelAndView mav
 								 ) {
+		
+	
+		
 		//検索条件
 		mav.addObject(ADDNAME_LOGINID, loginId);
 		mav.addObject(ADDNAME_USERNAME, userName);
@@ -157,6 +160,7 @@ public class UserUpdateController {
 	}
 	
 	//更新結果画面へ遷移
+	@SuppressWarnings("unused")
 	@RequestMapping(value=URL_UPDATE_RESULT, method=RequestMethod.POST)
 	public ModelAndView updateResult(/*検索条件の保持
 									  *検索させるときに同じDBのフィールド名にするためパラメーター名を変更
@@ -172,10 +176,12 @@ public class UserUpdateController {
 									 @RequestParam(name=UPDATE_ICON) String Icon,
 									 @RequestParam(name=UPDATE_PROFILE) String Profile,
 									 ModelAndView mav) {
-		//更新
-		UserInfo user = new UserInfo(userId, LoginId, UserName, Icon, Profile);
-		repository.saveAndFlush(user);
 		
+		boolean check = false;
+		
+		//userId
+		boolean UserId = repository.existsById(userId);
+	
 		//更新結果画面表示
 		mav.addObject(ADDNAME_UPDATE_AFTER_LOGINID, LoginId);
 		mav.addObject(ADDNAME_UPDATE_USERNAME, UserName);
@@ -188,7 +194,16 @@ public class UserUpdateController {
 		mav.addObject(ADDNAME_ICON, icon);
 		mav.addObject(ADDNAME_PROFILE, profile);
 		
-		mav.setViewName(DISPLAY_OF_UPDATE_RESULT);
+		if(UserId) {
+			//更新
+			UserInfo user = new UserInfo(userId, LoginId, UserName, Icon, Profile);
+			repository.saveAndFlush(user);
+			mav.setViewName(DISPLAY_OF_UPDATE_RESULT);
+		}else {
+			check = true;
+			mav.addObject(ADDNAME_ERROR, check);
+			mav.setViewName(DISPLAY_OF_UPDATE_RESULT);
+		}
 		return mav;
 	}
 }

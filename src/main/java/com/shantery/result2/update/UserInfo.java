@@ -37,7 +37,7 @@ public class UserInfo {
 	@NotEmpty
 	private String profile;
 	
-	//引数ありコンストラクタ
+	//引数ありコンストラクタ　更新時に使用
 	public UserInfo(Long userId, String loginId, String userName, String icon, String profile) {
 		this.userId = userId;
 		this.loginId = loginId;
