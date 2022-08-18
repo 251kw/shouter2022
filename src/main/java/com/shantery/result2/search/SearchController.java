@@ -48,6 +48,8 @@ public class SearchController {
 			@RequestParam(value=DISPLAY_BACK,required=false)String back,
 			@ModelAttribute(FORM_MODEL)@Validated UserData userdata, BindingResult result,
 			ModelAndView mav) {
+		//エラーの数で場合分け
+		int errornum = result.getErrorCount();
 		//チェックボックス保持用のキーワード
 		String iconCheck = null;
 		//チェックボックスの配列の長さ
@@ -64,8 +66,8 @@ public class SearchController {
 			mav.addObject(ADDNAME_ICON, icons[0]);
 			mav.addObject(ADDNAME_PROFILE, profile);
 		}else {
-			if(!result.hasErrors()) {
-				//エラーがなかったら
+			if(!result.hasErrors() || (loginId.equals("") && result.hasErrors() && errornum == 1)) {
+				//エラーがなかったら、またはログインIDは空文字で他の項目が入っていたら
 				//検索結果用フラグ
 				boolean searchresult = false;
 				String icon = null;
@@ -127,8 +129,7 @@ public class SearchController {
 				//検索結果画面に遷移
 				mav.setViewName(DISPLAY_OF_SEARCH_RESULT);
 			}else {
-				//エラーがある場合は表示用に結果を格納,エラー数でエラーを判断
-				int errornum = result.getErrorCount();
+				//未入力、ログインIDに半角英数字以外が入力された場合				
 				if(errornum == 2) {
 					//未記入の場合
 					mav.addObject(ADDNAME_ERROR, result.hasErrors());
