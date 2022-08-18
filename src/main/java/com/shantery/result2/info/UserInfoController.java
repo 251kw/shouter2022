@@ -63,47 +63,41 @@ public class UserInfoController {
 			@RequestParam(value = PROFILE, required = false) String profile,
 			@RequestParam(value = DISPLAY_BACKS, required = false) String backs, ModelAndView mav) {
 
-		// 戻るボタンが押されたら登録入力画面に戻る
-		if (backs != null) {
-			// 登録入力条件保持
-			mav.addObject(ADDNAME_LOGINID, loginId);
-			mav.addObject(ADDNAME_PASSWORD, password);
-			mav.addObject(ADDNAME_USERNAME, userName);
-			mav.addObject(ADDNAME_ICON, icon);
-			mav.addObject(ADDNAME_PROFILE, profile);
-			mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
-		}
 		UserInfoData user = repository.findByLoginId(loginId);
 		boolean INFO_CHECK = false;
-		// 入力チェックに引っかかった場合、新規登録画面に戻る
-		if (result.hasErrors()) {
-			// 登録入力条件保持
-			mav.addObject(ADDNAME_ERROR, result.hasErrors());
-			mav.addObject(ADDNAME_LOGINID, loginId);
-			mav.addObject(ADDNAME_PASSWORD, password);
-			mav.addObject(ADDNAME_USERNAME, userName);
-			mav.addObject(ADDNAME_ICON, icon);
-			mav.addObject(ADDNAME_PROFILE, profile);
+
+		// 登録入力条件保持
+		mav.addObject(ADDNAME_LOGINID, loginId);
+		mav.addObject(ADDNAME_PASSWORD, password);
+		mav.addObject(ADDNAME_USERNAME, userName);
+		mav.addObject(ADDNAME_ICON, icon);
+		mav.addObject(ADDNAME_PROFILE, profile);
+
+		// 戻るボタンが押されたら登録入力画面に戻る
+		if (backs != null) {
 			mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
+		}
+		
+		int loginError = result.getFieldErrorCount(FIELD_LOGINID);
+		// 未入力の場合エラー表示
+		if (result.hasErrors()) {
+			if(loginError == 2 || loginError == 0) {
+			mav.addObject(ADDNAME_ERROR, result.hasErrors());
+			mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
+			}else {
+				//ログインIDが半角英数字ではない場合
+				mav.addObject(LOGINID_INPUT_ERROR, result.hasErrors());
+				mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
+			}
 		} else {
-			// ユーザー情報重複なしだったら、結果表示。重複ありだったらエラー表示
+			// ユーザー情報重複ありだったらエラー表示
 			if (user != null) {
 				INFO_CHECK = true;
 				mav.addObject(DUPLICATION_ERROR, INFO_CHECK);
-				mav.addObject(ADDNAME_LOGINID, loginId);
-				mav.addObject(ADDNAME_PASSWORD, password);
-				mav.addObject(ADDNAME_USERNAME, userName);
-				mav.addObject(ADDNAME_ICON, icon);
-				mav.addObject(ADDNAME_PROFILE, profile);
 				// 新規登録入力画面へ遷移
 				mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
 			} else {
-				mav.addObject(ADDNAME_LOGINID, loginId);
-				mav.addObject(ADDNAME_PASSWORD, password);
-				mav.addObject(ADDNAME_USERNAME, userName);
-				mav.addObject(ADDNAME_ICON, icon);
-				mav.addObject(ADDNAME_PROFILE, profile);
-				// 新規登録確認画面へ遷移
+				// 何のエラーもなかった場合、新規登録確認画面へ遷移
 				mav.setViewName(DISPLAY_OF_USERINFO_CONFIRM);
 			}
 		}
