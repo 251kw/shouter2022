@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import static com.shantery.common.constants.*;
 
@@ -28,6 +29,7 @@ public class UserLoginData {
 
 	@Column(name=COLUMN_LOGINID,nullable = false)
 	@NotEmpty
+	@Pattern(regexp = "^[a-zA-Z0-9]+$")
 	private String loginId;
 	
 	@Column(nullable = false)	

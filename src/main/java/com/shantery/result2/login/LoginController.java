@@ -75,9 +75,15 @@ public class LoginController {
 				mav.setViewName(DISPLAY_OF_INDEX);
 			}
 		}else {
-			//未入力の場合エラーを表示する
-			logcheck = BLANK;
-			mav.addObject(ADDNAME_ERROR, logcheck);
+			int loginError = result.getFieldErrorCount(FIELD_LOGINID);
+			if(loginError == 2 || loginError == 0) {
+				//未入力の場合エラーを表示する
+				logcheck = BLANK;
+				mav.addObject(ADDNAME_ERROR, logcheck);
+			}else {
+				//ログインIDが半角英数字ではない場合
+				mav.addObject(ADDNAME_ERROR2, result.hasErrors());
+			}
 			//ログイン画面へ遷移
 			mav.setViewName(DISPLAY_OF_INDEX);
 		}

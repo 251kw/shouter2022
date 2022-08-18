@@ -31,7 +31,9 @@
 			<table border="1" class="table text-center"  style="width: 60%;" >
 				<tr>
 					<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"></th>
-					<td><input type="text" name="loginId" value="" class="form-control"></td>
+					<td><input type="text" name="loginId" value="" class="form-control">
+					<!-- ログインIDが半角英数字ではなかったらエラーを表示-->
+					<p th:if="${error2}" th:text="#{error.login.loginId}" class="error"></p></td>
 				</tr>
 				<tr>
 					<th th:text="#{table.password}" class="bi bi-key"></th>
