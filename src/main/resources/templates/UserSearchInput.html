@@ -21,8 +21,10 @@
 	<div class="form-group">
 		<table border="1" class="table">
 			<tr>
-				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"></th></label>
-				<td><input type="text" name="loginId" th:value="${loginId}" class="form-control"></td>
+				<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"></th>
+				<td><input type="text" name="loginId" th:value="${loginId}" class="form-control">
+				<!-- ログインIDが半角英数字ではなかったらエラーを表示-->
+				<p th:if="${error2}" th:text="#{error.search.loginId}" class="error"></p></td>
 			</tr>
 			<tr>
 				<th th:text="#{table.userName}" class="bi bi-person-circle"></th>

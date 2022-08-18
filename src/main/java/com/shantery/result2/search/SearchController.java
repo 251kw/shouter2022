@@ -127,9 +127,31 @@ public class SearchController {
 				//検索結果画面に遷移
 				mav.setViewName(DISPLAY_OF_SEARCH_RESULT);
 			}else {
-				//エラーがある場合は表示用に結果を格納
-				mav.addObject(ADDNAME_ERROR, result.hasErrors());
-				mav.addObject(ADDNAME_ICON, ICON_NOCHECK);
+				//エラーがある場合は表示用に結果を格納,エラー数でエラーを判断
+				int errornum = result.getErrorCount();
+				if(errornum == 2) {
+					//未記入の場合
+					mav.addObject(ADDNAME_ERROR, result.hasErrors());
+					mav.addObject(ADDNAME_ICON, ICON_NOCHECK);
+				}else {
+					//ログインIDが半角英数字ではない場合
+					mav.addObject(ADDNAME_ERROR2, result.hasErrors());
+					if(length == 2) {
+						//アイコンが2種類選択された場合のフラグ
+						iconCheck = ICON_CHECKS;
+					}else if(length == 1) {
+						//icon-maleまたはicon-femaleの場合
+						iconCheck = icons[0];
+					}else {
+						//アイコンにチェックしない場合のフラグ
+						iconCheck = ICON_NOCHECK;
+					}
+					//検索条件保持
+					mav.addObject(ADDNAME_LOGINID,loginId);
+					mav.addObject(ADDNAME_USERNAME, userName);
+					mav.addObject(ADDNAME_ICON, iconCheck);
+					mav.addObject(ADDNAME_PROFILE, profile);
+				}
 				//入力画面に遷移
 				mav.setViewName(DISPLAY_OF_SEARCH_INPUT);
 			}

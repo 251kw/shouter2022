@@ -95,6 +95,7 @@ public class constants {
 	public static final String ADDNAME_SHOUTLIST = "shoutlist";
 	public static final String ADDNAME_RESULT = "result";
 	public static final String ADDNAME_ERROR = "error";
+	public static final String ADDNAME_ERROR2 = "error2";
 	public static final String ADDNAME_CHECKBOX = "checkbox";
 	public static final String ADDNAME_UPDATE_USERID = "userId";
 	public static final String ADDNAME_UPDATE_BEFORE_LOGINID = "loginID";
