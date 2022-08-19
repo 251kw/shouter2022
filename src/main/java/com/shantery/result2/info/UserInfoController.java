@@ -37,18 +37,17 @@ public class UserInfoController {
 			@RequestParam(value = PROFILE, required = false) String profile,
 			@RequestParam(value = DISPLAY_BACK, required = false) String back, ModelAndView mav) {
 
+		// 登録入力条件保持
+		mav.addObject(ADDNAME_LOGINID, loginId);
+		mav.addObject(ADDNAME_PASSWORD, password);
+		mav.addObject(ADDNAME_USERNAME, userName);
+		mav.addObject(ADDNAME_ICON, icon);
+		mav.addObject(ADDNAME_PROFILE, profile);
+		mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
 		// 登録入力画面で戻るボタン押されたら
 		if (back != null) {
 			// ログイン画面に遷移
 			mav.setViewName(DISPLAY_OF_INDEX);
-		} else {
-			// 登録入力条件保持
-			mav.addObject(ADDNAME_LOGINID, loginId);
-			mav.addObject(ADDNAME_PASSWORD, password);
-			mav.addObject(ADDNAME_USERNAME, userName);
-			mav.addObject(ADDNAME_ICON, icon);
-			mav.addObject(ADDNAME_PROFILE, profile);
-			mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
 		}
 		return mav;
 	}
@@ -77,15 +76,15 @@ public class UserInfoController {
 		if (backs != null) {
 			mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
 		}
-		
+
 		int loginError = result.getFieldErrorCount(FIELD_LOGINID);
 		// 未入力の場合エラー表示
 		if (result.hasErrors()) {
-			if(loginError == 2 || loginError == 0) {
-			mav.addObject(ADDNAME_ERROR, result.hasErrors());
-			mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
-			}else {
-				//ログインIDが半角英数字ではない場合
+			if (loginError == 2 || loginError == 0) {
+				mav.addObject(ADDNAME_ERROR, result.hasErrors());
+				mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
+			} else {
+				// ログインIDが半角英数字ではない場合
 				mav.addObject(LOGINID_INPUT_ERROR, result.hasErrors());
 				mav.setViewName(DISPLAY_OF_USERINFO_INPUT);
 			}
@@ -113,18 +112,26 @@ public class UserInfoController {
 			@RequestParam(value = ICON, required = false) String icon,
 			@RequestParam(value = PROFILE, required = false) String profile,
 			@RequestParam(value = DISPLAY_BACK, required = false) String back, ModelAndView mav) {
-		// データベースに登録
-		infoService.create(userinfodata);
-
 		// 登録結果画面表示
 		mav.addObject(ADDNAME_LOGINID, loginId);
 		mav.addObject(ADDNAME_PASSWORD, password);
 		mav.addObject(ADDNAME_USERNAME, userName);
 		mav.addObject(ADDNAME_ICON, icon);
 		mav.addObject(ADDNAME_PROFILE, profile);
-		mav.setViewName(DISPLAY_OF_USERINFO_RESULT);
-		if (back != null) {
-			mav.setViewName(DISPLAY_OF_INDEX);
+		
+		// ログインID検索
+		UserInfoData user = repository.findByLoginId(loginId);
+		boolean INFO_CHECK = false;
+		// ユーザー情報重複ありだったらエラー表示
+		if (user != null) {
+			INFO_CHECK = true;
+			mav.addObject(DUPLICATION_ERROR, INFO_CHECK);
+			// 新規登録入力画面へ遷移
+			mav.setViewName(DISPLAY_OF_USERINFO_CONFIRM);
+		} else {
+			// データベースに登録
+			infoService.create(userinfodata);
+			mav.setViewName(DISPLAY_OF_USERINFO_RESULT);
 		}
 		return mav;
 	}

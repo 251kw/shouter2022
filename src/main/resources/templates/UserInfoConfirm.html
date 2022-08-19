@@ -22,7 +22,8 @@
 				<table border="1" class="table">
 					<tr>
 						<th th:text="#{table.loginId}" class="bi bi-box-arrow-in-left"><label for="id"></label></th>
-						<td th:text="${loginId}"></td>
+						<td th:text="${loginId}">
+						</td>
 					</tr>
 					<tr>
 						<th th:text="#{table.password}" class="bi bi-key"><label for="password"></label></th>
@@ -54,7 +55,8 @@
 				<p><input type="hidden" name="icon" th:value="${icon}"></p>
 				<p><input type="hidden" name="profile" th:value="${profile}"></p>
 			</div>
-			<p th:if="${error}" th:text="#{error.write.all}" class="error"></p>
+			<!-- 既存のログインIDの場合エラー表示-->
+			<p th:if="${error2}" th:text="#{error.register.input}" class="error"></p>
 		</form>
 	</div>
 </body>
