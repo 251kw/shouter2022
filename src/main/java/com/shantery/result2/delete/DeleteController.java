@@ -115,7 +115,7 @@ public class DeleteController {
 			@RequestParam(name = USERID, required = false) Long[] userId,
 			@RequestParam(value = LOGINID2) String loginId, @RequestParam(value = USERNAME2) String userName,
 			@RequestParam(value = ICON2) String icon, @RequestParam(value = PROFILE2) String profile,
-			ModelAndView mav) {
+			@Validated @ModelAttribute UserInfom userinfom, BindingResult result, ModelAndView mav) {
 
 		// UserInfo型リストを作成
 		List<UserInfom> list = null;
@@ -131,16 +131,33 @@ public class DeleteController {
 		// リストに追加(削除結果画面表示用)
 		mav.addObject(ADDNAME_DATALIST, lists);
 
-		// 1件づつ削除を実行
-		for (int i = 0; i < userId.length; i++) {
-			udRepository.deleteByUserId(userId[i]);
+		if (lists.size() != 0) {
+
+			// 1件づつ削除を実行
+			for (int i = 0; i < userId.length; i++) {
+				udRepository.deleteByUserId(userId[i]);
+			}
+			// 検索条件保持
+
+			mav.addObject(ADDNAME_LOGINID, loginId);
+			mav.addObject(ADDNAME_USERNAME, userName);
+			mav.addObject(ADDNAME_ICON, icon);
+			mav.addObject(ADDNAME_PROFILE, profile);
+			mav.setViewName(DISPLAY_OF_DELETE_RESULT);
+		} else {
+			boolean check = true;
+			// 削除重複の場合のエラー
+			mav.addObject(ADDNAME_ERROR, check);
+
+			// 検索条件の保持
+			mav.addObject(ADDNAME_LOGINID, loginId);
+			mav.addObject(ADDNAME_USERNAME, userName);
+			mav.addObject(ADDNAME_ICON, icon);
+			mav.addObject(ADDNAME_PROFILE, profile);
+			mav.setViewName(DISPLAY_OF_DELETE_RESULT);
+
 		}
-		// 検索条件保持
-		mav.addObject(ADDNAME_LOGINID, loginId);
-		mav.addObject(ADDNAME_USERNAME, userName);
-		mav.addObject(ADDNAME_ICON, icon);
-		mav.addObject(ADDNAME_PROFILE, profile);
-		mav.setViewName(DISPLAY_OF_DELETE_RESULT);
 		return mav;
 	}
+
 }
