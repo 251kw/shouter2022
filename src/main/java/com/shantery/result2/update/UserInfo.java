@@ -23,12 +23,12 @@ public class UserInfo {
 	private Long userId;
 	
 	@Column(name=COLUMN_LOGINID, nullable = false, unique = true)
-	@NotEmpty //(groups = ValidationFirst.class)								//1番目に行うバリテーションチェック
-	@Pattern(regexp = "^[a-zA-Z0-9]*$")	//2番目に行うバリテーションチェック
+	@NotEmpty
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")	//半角英数字空白のみOK
 	private String loginId;
 
 	@Column(name=COLUMN_USERNAME, nullable = false)
-	@NotEmpty //(groups = ValidationFirst.class)								//1番目に行うバリテーションチェック
+	@NotEmpty
 	private String userName;
 
 	@Column(name="icon", nullable = false)
@@ -36,7 +36,7 @@ public class UserInfo {
 	private String icon;
 
 	@Column(name="profile", nullable = false)
-	@NotEmpty //(groups = ValidationFirst.class)								//1番目に行うバリテーションチェック
+	@NotEmpty
 	private String profile;
 	
 	//引数ありコンストラクタ　更新時に使用
