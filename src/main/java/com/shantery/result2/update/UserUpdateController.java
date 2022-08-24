@@ -75,7 +75,7 @@ public class UserUpdateController {
 								  @RequestParam(name=USERNAME) String userName,
 								  @RequestParam(name=UPDATE_ICON) String Icon,		
 								  @RequestParam(name=PROFILE) String profile,
-								  @Validated @ModelAttribute UserInfo userInfo,
+								  @Validated(ValidationAll.class) @ModelAttribute UserInfo userInfo,
 			  					  BindingResult result,
 								  @RequestParam(name=USERID) String userId,
 								  @RequestParam(name=UPDATE_BEFORE_LOGINID) String loginID,	//変更前(編集画面に遷移して一番初めに表示されるログインID)

@@ -23,8 +23,8 @@ public class UserInfo {
 	private Long userId;
 	
 	@Column(name=COLUMN_LOGINID, nullable = false, unique = true)
-	@NotEmpty
-	@Pattern(regexp = "^[a-zA-Z0-9]+$")
+	@NotEmpty(groups = ValidationFirst.class)
+	@Pattern(regexp = "^[a-zA-Z0-9]+$", groups = ValidationSecond.class)
 	private String loginId;
 
 	@Column(name=COLUMN_USERNAME, nullable = false)
